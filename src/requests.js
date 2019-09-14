@@ -1,0 +1,69 @@
+
+const HTTP_HEADER = { 'Content-Type': 'application/json',
+                      'Accept-Charset' : 'utf-8',
+                    };
+
+const MOVIE_DB_URL = 'https://api.themoviedb.org/3'
+const API_KEY = 'a3278e53efab52ff2751ae5a39636b4c'
+const LANGUAGE = '&language=en-US&'
+const PAGE = '&page=1'
+const ADULT = '&include_adult=false'
+
+// Documentation: https://www.themoviedb.org/documentation/api
+
+/**
+ * 
+ * @param {string} type 
+ * @param {string} query 
+ * type must be 'tv/ person/ movie
+ * query can be any string
+ */
+export const fetchSearchResults = (query) => {
+  const method = 'GET'
+  const url = `search/multi?api_key=${API_KEY}${LANGUAGE}query=${query}${PAGE}${ADULT}`
+  return request(url, { method })
+}
+
+const attachDirector = (credits) => {
+  if (!credits) return null
+  const director = credits.crew.find(crewPerson => {
+    return crewPerson.job === 'Director'
+  })
+  return director ? director.name : null
+}
+
+const attachFilmPreview = (videos) => {
+  console.log(videos)
+  if(!videos) return null
+  if(!videos.results[0]) return videos.results[0]
+}
+
+export const fetchMovieExtras = async (id) => {
+  try {
+    const method = 'GET'
+    const appenderText = '&append_to_response=credits,videos'
+    const url = `movie/${id}?api_key=${API_KEY}${appenderText}`
+    const res = await request(url, { method })
+
+    const director = attachDirector(res.credits)
+    const filmPreview = attachFilmPreview(res.videos)
+    console.log(filmPreview, 'filmpreview')
+    const runtime = res.runtime
+    return { director, filmPreview, runtime }
+  }
+  catch(err) {
+    console.error(err)
+  }
+}
+
+export const request = async (endpoint, options = {}) => {
+  const { method } = options
+  const url = `${MOVIE_DB_URL}/${endpoint}`
+  try {
+    const res = await fetch(url, { method, headers: HTTP_HEADER })
+    return res.json()
+  }
+  catch(err) {
+    console.error('request error')
+  }
+}
