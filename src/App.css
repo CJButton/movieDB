@@ -1,8 +1,8 @@
-.App {
+/* .App { */
   /* text-align: center; */
-}
+/* } */
 
-.App-logo {
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
@@ -30,4 +30,78 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* ----- Tabs ------ */
+.nav-wrapper {
+  padding: 3em 0 0;
+  background-color: #335267;
+}
+
+li.nav-item:first-child {
+  margin-left: 2em;
+}
+
+li.nav-item:last-child {
+  margin-right: 2em;
+}
+
+/* .nav-wrapper:first-child {
+  margin-left: 2em;
+}
+
+.nav-wrapper ul.li:last-child {
+  margin-left: 2em;
+} */
+
+
+
+
+
+/* ----- Search ------ */
+
+.input-icons i { 
+  position: absolute;
+} 
+
+.input-icons {
+  width: 80%; 
+  margin: 3em auto;
+  padding: 0 50px;
+} 
+
+.icon { 
+  padding: 10px; 
+  min-width: 40px; 
+} 
+
+.input-field { 
+  width: 85%; 
+  padding: 5px; 
+  padding-left: 30px;
+  border-width: 1px;
+  border-radius: 5px 0 0 5px;
+  background-color: #F9FBFC;
+  box-shadow: none;
+} 
+
+.input-field:focus {
+  border-color: #527187;
+  background-color: white;
+  border-width: 1px;
+  outline: 0;
+  box-shadow: none;
+}
+
+Button.search-button {
+  color: #335267;
+  background-color: white;
+  border-radius: 0 5px 5px 0;
+  margin-bottom: 3px;
+  height: 36px;
+}
+
+Button.search-button:hover {
+  color: #335267;
+  background-color: #FBFCFD;
 }

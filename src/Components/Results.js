@@ -41,7 +41,8 @@ const Results = ({searchResults, searchType}) => {
 
   return (
     <div>
-      {searchResults.map(item => (
+      {searchResults.length ? 
+        searchResults.map(item => (
         <div key={item.id}>
           <Row>
             <Col xs="3">
@@ -52,7 +53,9 @@ const Results = ({searchResults, searchType}) => {
             </Col>
           </Row>
         </div>
-      ))}
+      )) :
+          'No results to display... Try typing something!'
+      }
     </div>
   )
 }

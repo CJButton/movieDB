@@ -4,22 +4,8 @@ import '../App.css';
 import Tabs from '../Components/Tabs'
 import Results from '../Components/Results'
 import { fetchSearchResults } from '../requests'
-import Search from '../Components/Search';
-/*
- * MovieSearch Component
- *  Children components are placed inside as needed
- *  Will need a Tabs Bar which should be reusable
- *  a Search Bar
- *  and a Results Component
- */
+import Search from '../Components/Search'
 
- /**
-  * Further Tasks
-  * Complete basic info for Moive/ TV/ Person Components
-  * Get video and images working where necessary
-  * Basic CSS but nothing too fancy
-  * Clean up call system for getting crew - bottlenecking!
-  */
 export const TAB_ITEMS = [
   {
     title: 'MOVIES',
@@ -47,7 +33,7 @@ const MovieSearch = () => {
 
     const values = {movie: [], tv: [], person: []}
     await res.results.map(media => values[media.media_type].push(media))
-    
+
     updateResults(values)
   }
   return (

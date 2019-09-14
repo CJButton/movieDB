@@ -25,7 +25,7 @@ export const fetchSearchResults = (query) => {
 }
 
 const attachDirector = (credits) => {
-  if (!credits) return null
+  if (!credits.crew) return null
   const director = credits.crew.find(crewPerson => {
     return crewPerson.job === 'Director'
   })
@@ -33,9 +33,8 @@ const attachDirector = (credits) => {
 }
 
 const attachFilmPreview = (videos) => {
-  console.log(videos)
-  if(!videos) return null
-  if(!videos.results[0]) return videos.results[0]
+  if(!videos.results) return null
+  if(videos.results[0]) return videos.results[0].key
 }
 
 export const fetchMovieExtras = async (id) => {
@@ -47,7 +46,6 @@ export const fetchMovieExtras = async (id) => {
 
     const director = attachDirector(res.credits)
     const filmPreview = attachFilmPreview(res.videos)
-    console.log(filmPreview, 'filmpreview')
     const runtime = res.runtime
     return { director, filmPreview, runtime }
   }

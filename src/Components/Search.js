@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react'
-import { Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { Button, Row } from 'reactstrap';
+// import 'bootstrap/dist/css/bootstrap.css';
 
 /**
  * Search Component
- * 
  */
 
 const Search = ({searchForItem, searchType}) => {
@@ -20,19 +20,24 @@ const Search = ({searchForItem, searchType}) => {
   }
 
   return (
-    <InputGroup>
-      <Input
-        placeholder={`Search for ${searches[searchType]}`}
-        onKeyUp={(e) => updateCurrentSearch(e)}
-        onChange={(e) => updateSearch(e.target.value)} />
-        <i className="fas fa-search" />
-        <InputGroupAddon addonType="append">
-          <Button onClick={() => searchForItem(currentSearch)}>
-            Search
-          </Button>
-        </InputGroupAddon>
-    </InputGroup>
+      <Row>
+        <div className="input-icons"> 
+        <i className="fa fa-search icon"></i>
+        <input
+          placeholder={`Search for ${searches[searchType]}`}
+          onKeyUp={(e) => updateCurrentSearch(e)}
+          onChange={(e) => updateSearch(e.target.value)}
+          className="input-field" 
+          type="text" />
+        <Button 
+          className='search-button'
+          onClick={() => searchForItem(currentSearch)}>
+          Search
+        </Button>
+        </div>
+      </Row>
   )
 }
+
 
 export default Search

@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Line } from 'rc-progress';
+import { Line } from 'rc-progress'
+import { Button } from 'reactstrap'
+import ReactPlayer from 'react-player'
+
 import { fetchMovieExtras } from '../requests'
 // import PropTypes from 'prop-types'
 
-/**
- * Needs to display --------
- * Title O
- * Overview O
- * Picture O
- * Director O
- * Release Year -> O
- * Runtime -> API broken ATM will be with runtime key in minutes
- * User Rating -> vote_average get an npm to handle this
- * Trailer - https://www.youtube.com/watch?v=SUXWAEX2jlg
- * do an api call here upon loading with append
- * //   const appenderText = '&append_to_response=credits,videos'
- */
-
 const Movie = (props) => {
   const [filmExtras, updateExtras] = useState({runtime: null, director: null, filmPreview: null})
-  console.log(props)
-  const year = props.release_date.split('-')[0]
+  const [isPlayerOpen, updatePlayer] = useState(false)
+
+  const year = props.release_date ? props.release_date.split('-')[0] : null
   const voteTotal = props.vote_average * 10
 
   const strokeColors = () => {
@@ -39,7 +29,6 @@ const Movie = (props) => {
   useEffect(() => {
     const fetchExtras = async () => {
       const { runtime, director, filmPreview} = await fetchMovieExtras(props.id)
-      console.log(runtime, director, filmPreview, 'returned values -----')
       updateExtras({runtime, director, filmPreview})
 
     }
@@ -52,7 +41,7 @@ const Movie = (props) => {
   return(
     <div>
       <h5>{props.title}</h5>
-      <h5>{year}</h5>
+      {year && <h5>{year}</h5>}
       {filmExtras.director && <p>Director: {filmExtras.director}</p>}
       {totalRuntime && <p>Runtime: {totalRuntime}</p>}
       <p>{props.overview}</p>
@@ -61,6 +50,17 @@ const Movie = (props) => {
         percent={voteTotal} 
         strokeWidth="1" 
         strokeColor={`#${strokeColors()}`} />
+      {filmExtras.filmPreview && 
+        <Button onClick={() => updatePlayer(!isPlayerOpen)}>
+          {/* <i className="fas fa-play"></i> */}
+          {isPlayerOpen ? 'Close Trailer' : 'Play Trailer'}
+        </Button>
+      }
+      {isPlayerOpen && 
+        <ReactPlayer 
+          url={`https://www.youtube.com/watch?v=${filmExtras.filmPreview}`} 
+          controls
+          playing />}
     </div>
   )
 }

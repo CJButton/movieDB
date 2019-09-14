@@ -15,7 +15,7 @@ const Tabs = ({tabItems, setParentTab}) => {
   })
 
   return (
-    <Nav tabs>
+    <Nav className='nav-wrapper' tabs fill>
       {tabItems.map((item => (
         <NavItem key={`tab-item-${item.value}`}>
           <NavLink
