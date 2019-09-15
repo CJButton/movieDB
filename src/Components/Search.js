@@ -8,7 +8,7 @@ import { Button } from 'reactstrap';
 
 const Search = ({searchForItem, searchType}) => {
   const [currentSearch, updateSearch] = useState('')
-  // let's move this to the parent or another file
+
   const searches = {
     'movie': 'a movie...',
     'tv': 'a tv show...',

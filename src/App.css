@@ -100,19 +100,19 @@ Button.search-button:hover {
 
 /* Movie */
 
-.movie {
+.type-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
 
-.movie-title {
+.type-title {
   margin-right: 5px;
   color: #15374C;
 }
 
-.movie-year {
+.type-year {
   color: #608092;
 }
 
@@ -182,7 +182,7 @@ Button.preview-button.disabled {
 }
 
 .preview-elements_icon {
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .preview-elements_text {

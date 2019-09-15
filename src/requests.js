@@ -63,6 +63,28 @@ export const fetchPersonExtras = async (id) => {
   }
 }
 
+export const fetchExtrasInfo = async (type, id) => {
+  try {
+    const method = 'GET'
+    const url = `${type}/${id}?api_key=${API_KEY}`
+    return await request(url, { method })
+  }
+  catch(err) {
+    console.error(err)
+  }
+}
+
+export const fetchTVExtras = async (id) => {
+  try {
+    const method = 'GET'
+    const url = `tv/${id}?api_key=${API_KEY}`
+    return await request(url, { method })
+  }
+  catch(err) {
+    console.error(err)
+  }
+}
+
 export const request = async (endpoint, options = {}) => {
   const { method } = options
   const url = `${MOVIE_DB_URL}/${endpoint}`

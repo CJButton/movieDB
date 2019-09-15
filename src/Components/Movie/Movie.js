@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row } from 'reactstrap'
-import Ratings from './Ratings'
+import Ratings from '../Ratings'
 import Preview from './Preview'
 
 import { fetchMovieExtras } from '../../requests'
@@ -22,11 +22,11 @@ const Movie = (props) => {
   const totalRuntime = filmExtras.runtime ? `${filmExtras.runtime} min` : null
 
   return(
-    <div className='movie'>
+    <div className='type-wrapper'>
       <div>
         <Row>
-          <h5 className='movie-title'>{props.title}</h5>
-          {year && <h5 className='movie-year'>({year})</h5>}
+          <h5 className='type-title'>{props.title}</h5>
+          {year && <h5 className='type-year'>({year})</h5>}
         </Row>
         <Row className='movie-extras'>
           { filmExtras.director && <p className='movie-director'>Director: {filmExtras.director}</p>}

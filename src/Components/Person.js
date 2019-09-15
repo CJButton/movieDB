@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row } from 'reactstrap'
 
-import { fetchPersonExtras } from '../requests'
+import { fetchExtrasInfo } from '../requests'
 // import PropTypes from 'prop-types'
 
 /**
@@ -16,14 +16,14 @@ const Person = ({id, name, known_for_department, gender}) => {
 
   useEffect(() => {
     const fetchExtras = async () => {
-      const {biography} = await fetchPersonExtras(id)
+      const {biography} = await fetchExtrasInfo('person', id)
       updateBio(biography)
     }
     fetchExtras()
   }, [id])
 
   return(
-    <div className='person'>
+    <div className='type-wrapper'>
       <Row>
         <h5 className='person-name'>{name}</h5>
       </Row>
