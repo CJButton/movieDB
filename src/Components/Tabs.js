@@ -8,7 +8,7 @@ import classnames from 'classnames'
  * Updates the parent after selection
  */
 const Tabs = ({tabItems, setParentTab}) => {
-  const [currentTab, updateLocalTab] = useState(tabItems[2].value)
+  const [currentTab, updateLocalTab] = useState(tabItems[0].value)
 
   useEffect(() => {
     setParentTab(currentTab)
@@ -18,12 +18,12 @@ const Tabs = ({tabItems, setParentTab}) => {
     <Nav className='nav-wrapper' tabs fill>
       {tabItems.map((item => (
         <NavItem 
-        className={classnames({ active: currentTab === item.value })}
-        key={`tab-item-${item.value}`}>
+          className={classnames({ active: currentTab === item.value })}
+          key={`tab-item-${item.value}`}>
           <NavLink
             className={classnames({ active: currentTab === item.value })}
             onClick={() => { updateLocalTab(item.value) }} >
-            { item.title }
+            <h5>{ item.title }</h5>
           </NavLink>
         </NavItem>
       )))}

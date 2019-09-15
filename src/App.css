@@ -1,36 +1,3 @@
-/* .App { */
-  /* text-align: center; */
-/* } */
-
-/* .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
 /* ----- Tabs ------ */
 .nav-wrapper {
@@ -172,7 +139,15 @@ Button.search-button:hover {
 
 .image-display {
   height: 100%;
+  box-shadow: 2px 5px 5px 2px grey
 }
+
+.image-display.missing {
+  height: 200px;
+  box-shadow: 2px 5px 5px 2px grey
+}
+
+
 
 /* Ratings */
 .ratings {
@@ -230,18 +205,3 @@ Button.preview-button.disabled {
 .person-overview {
   color: #325263;
 }
-
-
-
-/* .preview-play {
-  margin-right: 5px;
-} */
-/* default */
-/* 82CA37 */
-
-/* :hover */
-/* 66A82C */
-
-/* unavailable */
-/* D5DFE6 */
-/* cursor: not-allowed; */
