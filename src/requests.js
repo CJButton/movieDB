@@ -12,8 +12,6 @@ const ADULT = '&include_adult=false'
 // Documentation: https://www.themoviedb.org/documentation/api
 
 /**
- * 
- * @param {string} type 
  * @param {string} query 
  * type must be 'tv/ person/ movie
  * query can be any string

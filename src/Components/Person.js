@@ -5,12 +5,7 @@ import { fetchPersonExtras } from '../requests'
 // import PropTypes from 'prop-types'
 
 /**
- * Needs to display --------
- * name
- * known for
- * gender
- * 
- * bio
+ * Person
  */
 const Person = ({id, name, known_for_department, gender}) => {
     const [bio, updateBio] = useState(null)
@@ -26,9 +21,6 @@ const Person = ({id, name, known_for_department, gender}) => {
     }
     fetchExtras()
   }, [id])
-
-  // biography
-  // https://api.themoviedb.org/3/person/{person_id}?api_key=<<api_key>>&language=en-US
 
   return(
     <div className='person'>

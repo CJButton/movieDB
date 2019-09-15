@@ -133,6 +133,13 @@ Button.search-button:hover {
 
 /* Movie */
 
+.movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .movie-title {
   margin-right: 5px;
   color: #15374C;

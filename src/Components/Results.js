@@ -34,7 +34,7 @@ const Results = ({searchResults, searchType}) => {
             <Col xs='3'>
               <ImageDisplay 
                 image={item.poster_path || item.profile_path}
-                title={item.title} />
+                title={item.title || item.name} />
             </Col>
             <Col xs='9'>
               {selectComponent(item)}
