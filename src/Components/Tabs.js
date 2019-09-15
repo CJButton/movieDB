@@ -17,7 +17,9 @@ const Tabs = ({tabItems, setParentTab}) => {
   return (
     <Nav className='nav-wrapper' tabs fill>
       {tabItems.map((item => (
-        <NavItem key={`tab-item-${item.value}`}>
+        <NavItem 
+        className={classnames({ active: currentTab === item.value })}
+        key={`tab-item-${item.value}`}>
           <NavLink
             className={classnames({ active: currentTab === item.value })}
             onClick={() => { updateLocalTab(item.value) }} >

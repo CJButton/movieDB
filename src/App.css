@@ -38,6 +38,30 @@
   background-color: #335267;
 }
 
+li.nav-item {
+  color: white;
+  border-radius: 5px;
+}
+
+li.active.nav-item {
+  border-width: 4px 0 0 0;
+  border-style: solid;
+  border-color: #82CA37;
+  border-radius: 5px;
+}
+
+li.nav-item:hover {
+  cursor: pointer;
+}
+
+li.nav-item a.nav-link:hover {
+  border-color: transparent;
+}
+
+li.nav-item a.active.nav-link{
+  color: #335267;
+}
+
 li.nav-item:first-child {
   margin-left: 2em;
 }
@@ -45,14 +69,6 @@ li.nav-item:first-child {
 li.nav-item:last-child {
   margin-right: 2em;
 }
-
-/* .nav-wrapper:first-child {
-  margin-left: 2em;
-}
-
-.nav-wrapper ul.li:last-child {
-  margin-left: 2em;
-} */
 
 
 
