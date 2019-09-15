@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'reactstrap';
 
 /**
@@ -8,6 +8,11 @@ import { Button } from 'reactstrap';
 
 const Search = ({searchForItem, searchType}) => {
   const [currentSearch, updateSearch] = useState('')
+
+  useEffect(() => {
+    const params = window.location.search.replace('%20', ' ').slice(1)
+    updateSearch(params)
+  }, [])
 
   const searches = {
     'movie': 'a movie...',
@@ -26,7 +31,8 @@ const Search = ({searchForItem, searchType}) => {
           placeholder={`Search for ${searches[searchType]}`}
           onKeyUp={(e) => updateCurrentSearch(e)}
           onChange={(e) => updateSearch(e.target.value)}
-          className="input-field" 
+          className="input-field"
+          value={currentSearch}
           type="text" />
         <Button 
           className='search-button'

@@ -8,10 +8,16 @@ import { fetchExtrasInfo } from '../requests'
  * Person
  */
 const Person = ({id, name, known_for_department, gender}) => {
-    const [bio, updateBio] = useState(null)
-
+  const [bio, updateBio] = useState(null)
   const displayGender = () => {
-    return gender === 1 ? 'Female' : 'Male'
+    switch(gender) {
+      case 1:
+        return 'Female'
+      case 2:
+        return 'Male'
+      default:
+        return 'Not specified'
+    }
   }
 
   useEffect(() => {
@@ -24,22 +30,24 @@ const Person = ({id, name, known_for_department, gender}) => {
 
   return(
     <div className='type-wrapper'>
-      <Row>
-        <h5 className='person-name'>{name}</h5>
-      </Row>
-      <Row className='person-extras'>
-        {known_for_department && 
-          <p className='person-department'>
-            Known for: {known_for_department}
-          </p>
-        }
-        { known_for_department && gender && <p className='extras_hyphen'>-</p> }
-        {gender && 
-          <p className='person-gender'>
-            Gender: {displayGender()}
-          </p>
-        }
-      </Row>
+      <div>
+        <Row>
+          <h5 className='person-name'>{name}</h5>
+        </Row>
+        <Row className='person-extras'>
+          { !!known_for_department && 
+            <p className='person-department'>
+              Known for: {known_for_department}
+            </p>
+          }
+          { known_for_department && !!gender && <p className='extras_hyphen'>-</p> }
+          { !!gender && 
+            <p className='person-gender'>
+              Gender: {displayGender()}
+            </p>
+          }
+        </Row>
+      </div>
       <Row>
         <p className='person-bio'>{bio}</p>
       </Row>

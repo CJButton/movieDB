@@ -21,7 +21,7 @@ const ImageDisplay = ({image, title}) => {
             alt={`${title}-poster`}
           />
         </LazyLoad>
-        {!image && <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>}
+        {!image && <small><div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div></small>}
       </div>
     )
 }

@@ -13,8 +13,6 @@ const ADULT = '&include_adult=false'
 
 /**
  * @param {string} query 
- * type must be 'tv/ person/ movie
- * query can be any string
  */
 export const fetchSearchResults = (query) => {
   const method = 'GET'
@@ -35,16 +33,22 @@ const attachFilmPreview = (videos) => {
   if(videos.results[0]) return videos.results[0].key
 }
 
+/**
+ * @param {string} id 
+ */
 export const fetchMovieExtras = async (id) => {
   try {
     const method = 'GET'
     const appenderText = '&append_to_response=credits,videos'
     const url = `movie/${id}?api_key=${API_KEY}${appenderText}`
     const res = await request(url, { method })
+    if(res.status_code) {
+      return { director: null, filmPreview: null, runtime: null }
+    }
 
     const director = attachDirector(res.credits)
     const filmPreview = attachFilmPreview(res.videos)
-    const runtime = res.runtime
+    const runtime = res.runtime ? res.runtime : null
     return { director, filmPreview, runtime }
   }
   catch(err) {
@@ -52,32 +56,14 @@ export const fetchMovieExtras = async (id) => {
   }
 }
 
-export const fetchPersonExtras = async (id) => {
-  try {
-    const method = 'GET'
-    const url = `person/${id}?api_key=${API_KEY}`
-    return await request(url, { method })
-  }
-  catch(err) {
-    console.error(err)
-  }
-}
-
+/**
+ * @param {string} type
+ * @param {string} id
+ */
 export const fetchExtrasInfo = async (type, id) => {
   try {
     const method = 'GET'
     const url = `${type}/${id}?api_key=${API_KEY}`
-    return await request(url, { method })
-  }
-  catch(err) {
-    console.error(err)
-  }
-}
-
-export const fetchTVExtras = async (id) => {
-  try {
-    const method = 'GET'
-    const url = `tv/${id}?api_key=${API_KEY}`
     return await request(url, { method })
   }
   catch(err) {
