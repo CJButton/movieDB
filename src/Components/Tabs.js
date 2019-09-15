@@ -8,7 +8,7 @@ import classnames from 'classnames'
  * Updates the parent after selection
  */
 const Tabs = ({tabItems, setParentTab}) => {
-  const [currentTab, updateLocalTab] = useState(tabItems[0].value)
+  const [currentTab, updateLocalTab] = useState(tabItems[2].value)
 
   useEffect(() => {
     setParentTab(currentTab)

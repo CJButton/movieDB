@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Movie from './Movie/Movie'
 import TV from './TV'
 import Person from './Person'
-import LazyLoad from 'react-lazy-load';
+import ImageDisplay from './ImageDisplay'
 import { Row, Col } from 'reactstrap';
 
 /**
@@ -24,32 +24,19 @@ const Results = ({searchResults, searchType}) => {
     }
   }
 
-  const displayPoster = (poster_path, title) => (
-    <LazyLoad 
-      width={100}
-      height={100}
-      debounce={false}
-      offsetVertical={500}
-    >
-      <img
-        src={`https://image.tmdb.org/t/p/original/${poster_path}`}
-        alt={`${title}-poster`}
-        style={{'maxHeight': '15rem', 'textAlign': 'auto'}}
-      />
-    </LazyLoad>
-  )
-
   return (
     <div className='results-wrapper'>
       {searchResults.length ? 
         searchResults.map(item => (
         <div key={item.id}>
           <hr />
-          <Row>
-            <Col xs="3">
-              {item.poster_path && displayPoster(item.poster_path, item.title)}
+          <Row className='results-wrapper-block'>
+            <Col xs='3'>
+              <ImageDisplay 
+                image={item.poster_path || item.profile_path}
+                title={item.title} />
             </Col>
-            <Col>
+            <Col xs='9'>
               {selectComponent(item)}
             </Col>
           </Row>

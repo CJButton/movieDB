@@ -54,6 +54,17 @@ export const fetchMovieExtras = async (id) => {
   }
 }
 
+export const fetchPersonExtras = async (id) => {
+  try {
+    const method = 'GET'
+    const url = `person/${id}?api_key=${API_KEY}`
+    return await request(url, { method })
+  }
+  catch(err) {
+    console.error(err)
+  }
+}
+
 export const request = async (endpoint, options = {}) => {
   const { method } = options
   const url = `${MOVIE_DB_URL}/${endpoint}`

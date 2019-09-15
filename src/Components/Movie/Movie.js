@@ -28,9 +28,9 @@ const Movie = (props) => {
         {year && <h5 className='movie-year'>({year})</h5>}
       </Row>
       <Row className='movie-extras'>
-        {filmExtras.director && <p className='movie-director'>Director: {filmExtras.director}</p>}
-        { filmExtras.director && totalRuntime && <p className='movie-extras_hyphen'>-</p> }
-        {totalRuntime && <p className='movie-runtime'>Runtime: {totalRuntime}</p>}
+        { filmExtras.director && <p className='movie-director'>Director: {filmExtras.director}</p>}
+        { filmExtras.director && totalRuntime && <p className='extras_hyphen'>-</p> }
+        { totalRuntime && <p className='movie-runtime'>Runtime: {totalRuntime}</p>}
       </Row>
       <Row>
         <p className='movie-overview'>{props.overview}</p>

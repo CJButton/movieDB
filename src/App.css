@@ -71,10 +71,6 @@ li.nav-item:last-child {
   margin-right: 2em;
 }
 
-
-
-
-
 /* ----- Search ------ */
 
 .input-icons i { 
@@ -82,8 +78,9 @@ li.nav-item:last-child {
 } 
 
 .input-icons {
-  width: 100%; 
-  margin: 3em auto;
+  margin: 3em 0.5em 2em 0.5em;
+  display: flex;
+  flex-direction: row;
   padding: 0 50px;
 } 
 
@@ -93,7 +90,7 @@ li.nav-item:last-child {
 } 
 
 .input-field { 
-  width: 85%; 
+  width: 100%; 
   padding: 5px; 
   padding-left: 30px;
   border-width: 1px;
@@ -114,9 +111,8 @@ Button.search-button {
   color: #335267;
   background-color: white;
   border-radius: 0 5px 5px 0;
-  margin-bottom: 3px;
   height: 36px;
-  width:6.5em;
+  width: 122px;
 }
 
 Button.search-button:hover {
@@ -127,8 +123,12 @@ Button.search-button:hover {
 /* Results */
 
 .results-wrapper {
-  margin: 0 2.5em;
+  margin: 0 3.5em;
   color: #2F4E5F;
+}
+
+.results-wrapper-block {
+  margin: 2em 0;
 }
 
 /* Movie */
@@ -146,7 +146,7 @@ Button.search-button:hover {
   color: #608092;
 }
 
-.movie-extras_hyphen {
+.extras_hyphen {
   padding: 0 5px;
 }
 
@@ -156,6 +156,15 @@ Button.search-button:hover {
 
 .movie-ratings {
   justify-content: space-between;
+}
+
+/* ImageDisplay */
+.image-wrapper {
+  height: 100%;
+}
+
+.image-display {
+  height: 100%;
 }
 
 /* Ratings */
@@ -196,6 +205,23 @@ Button.preview-button.disabled {
 
 .preview-elements_text {
   margin-left: 5px;
+}
+
+/* Person */
+.person-name {
+  color: #15374C;
+}
+
+.person-extras {
+  color: #608092;
+}
+
+.extras_hyphen {
+  padding: 0 5px;
+}
+
+.person-overview {
+  color: #325263;
 }
 
 

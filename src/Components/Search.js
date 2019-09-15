@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Button, Row } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 /**
  * Search Component
@@ -20,8 +20,7 @@ const Search = ({searchForItem, searchType}) => {
   }
 
   return (
-      <Row>
-        <div className="input-icons"> 
+      <div className="input-icons"> 
         <i className="fa fa-search icon"></i>
         <input
           placeholder={`Search for ${searches[searchType]}`}
@@ -34,8 +33,7 @@ const Search = ({searchForItem, searchType}) => {
           onClick={() => searchForItem(currentSearch)}>
           Search
         </Button>
-        </div>
-      </Row>
+      </div>
   )
 }
 
