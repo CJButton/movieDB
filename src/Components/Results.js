@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Movie from './Movie'
+import Movie from './Movie/Movie'
 import TV from './TV'
 import Person from './Person'
 import LazyLoad from 'react-lazy-load';
@@ -40,10 +40,11 @@ const Results = ({searchResults, searchType}) => {
   )
 
   return (
-    <div>
+    <div className='results-wrapper'>
       {searchResults.length ? 
         searchResults.map(item => (
         <div key={item.id}>
+          <hr />
           <Row>
             <Col xs="3">
               {item.poster_path && displayPoster(item.poster_path, item.title)}

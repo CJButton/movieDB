@@ -39,7 +39,7 @@
 }
 
 li.nav-item {
-  color: white;
+  color: #D5DFE6;
   border-radius: 5px;
 }
 
@@ -52,6 +52,7 @@ li.active.nav-item {
 
 li.nav-item:hover {
   cursor: pointer;
+  color: #FFFFFF;
 }
 
 li.nav-item a.nav-link:hover {
@@ -81,7 +82,7 @@ li.nav-item:last-child {
 } 
 
 .input-icons {
-  width: 80%; 
+  width: 100%; 
   margin: 3em auto;
   padding: 0 50px;
 } 
@@ -115,9 +116,99 @@ Button.search-button {
   border-radius: 0 5px 5px 0;
   margin-bottom: 3px;
   height: 36px;
+  width:6.5em;
 }
 
 Button.search-button:hover {
   color: #335267;
   background-color: #FBFCFD;
 }
+
+/* Results */
+
+.results-wrapper {
+  margin: 0 2.5em;
+  color: #2F4E5F;
+}
+
+/* Movie */
+
+.movie-title {
+  margin-right: 5px;
+  color: #15374C;
+}
+
+.movie-year {
+  color: #608092;
+}
+
+.movie-extras {
+  color: #608092;
+}
+
+.movie-extras_hyphen {
+  padding: 0 5px;
+}
+
+.movie-overview {
+  color: #325263;
+}
+
+.movie-ratings {
+  justify-content: space-between;
+}
+
+/* Ratings */
+.ratings {
+  width: 10em;
+}
+
+.ratings_number {
+  width: 11em;
+}
+
+/* Preview */
+
+Button.preview-button {
+  background-color: #82CA37;
+  color: white;
+  border-radius: 30px;
+  max-height: 45px;
+}
+
+Button.preview-button:hover {
+  background-color: #66a82c;
+}
+
+Button.preview-button.disabled {
+  background-color: #D5DFE6;
+  color: #325263;
+  cursor: not-allowed;
+}
+
+.preview-elements-wrapper {
+  display: flex
+}
+
+.preview-elements_icon {
+  margin-top: 5px;
+}
+
+.preview-elements_text {
+  margin-left: 5px;
+}
+
+
+
+/* .preview-play {
+  margin-right: 5px;
+} */
+/* default */
+/* 82CA37 */
+
+/* :hover */
+/* 66A82C */
+
+/* unavailable */
+/* D5DFE6 */
+/* cursor: not-allowed; */
