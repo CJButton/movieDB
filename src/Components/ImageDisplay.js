@@ -1,11 +1,12 @@
 import React from 'react'
 import classnames from 'classnames'
 import LazyLoad from 'react-lazy-load';
+import noImage from '../noImage.png'
 
 const ImageDisplay = ({image, title}) => {
     const source = image 
     ? `https://image.tmdb.org/t/p/original/${image}`
-    : '/no-image.png'
+    : noImage
 
     return (
       <div className='image-wrapper'>

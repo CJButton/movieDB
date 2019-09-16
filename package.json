@@ -2,6 +2,7 @@
   "name": "comvex",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://cjbutton.github.io/movieDB",
   "dependencies": {
     "@babel/runtime": "^7.6.0",
     "bootstrap": "^4.3.1",
@@ -16,6 +17,8 @@
     "reactstrap": "^8.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -35,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }

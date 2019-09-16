@@ -18,7 +18,6 @@ const Preview = ({previewID}) => {
     }
   }
 
-
   return(
     <>
       <Button 

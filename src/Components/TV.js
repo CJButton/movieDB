@@ -20,7 +20,8 @@ const TV = (props) => {
     const fetchExtras = async () => {
       const {created_by, overview, first_air_date, episode_run_time} = await fetchExtrasInfo('tv', props.id)
       const createdBy = created_by ? created_by.map(person => (person.name)).join(', ') : null
-      updateExtras({createdBy, overview, first_air_date, episode_run_time})
+      const runTime = episode_run_time.length ? episode_run_time : null
+      updateExtras({createdBy, overview, first_air_date, episode_run_time: runTime})
     }
     fetchExtras()
   }, [props.id])
