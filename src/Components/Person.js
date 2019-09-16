@@ -29,25 +29,23 @@ const Person = ({id, name, known_for_department, gender}) => {
   }, [id])
 
   return(
-    <div className='type-wrapper'>
-      <div>
-        <Row>
-          <h5 className='person-name'>{name}</h5>
-        </Row>
-        <Row className='person-extras'>
-          { !!known_for_department && 
-            <p className='person-department'>
-              Known for: {known_for_department}
-            </p>
-          }
-          { known_for_department && !!gender && <p className='extras_hyphen'>-</p> }
-          { !!gender && 
-            <p className='person-gender'>
-              Gender: {displayGender()}
-            </p>
-          }
-        </Row>
-      </div>
+    <div className='person-wrapper'>
+      <Row>
+        <h5 className='person-name'>{name}</h5>
+      </Row>
+      <Row className='person-extras'>
+        { !!known_for_department && 
+          <p className='person-department'>
+            Known for: {known_for_department}
+          </p>
+        }
+        { known_for_department && !!gender && <p className='extras_hyphen'>-</p> }
+        { !!gender && 
+          <p className='person-gender'>
+            Gender: {displayGender()}
+          </p>
+        }
+      </Row>
       <Row>
         <p className='person-bio'>{bio}</p>
       </Row>

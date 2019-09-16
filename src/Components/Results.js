@@ -42,7 +42,7 @@ const Results = ({searchResults, searchType}) => {
           </Row>
         </div>
       )) :
-          'No results to display... Try typing something!'
+          'No results to display... Try typing something in the search bar and hit Enter!'
       }
     </div>
   )

@@ -4,6 +4,7 @@ import { Button } from 'reactstrap';
 
 /**
  * Search Component
+ * Displays search text and fires request for search
  */
 
 const Search = ({searchForItem, searchType}) => {
@@ -12,6 +13,7 @@ const Search = ({searchForItem, searchType}) => {
   useEffect(() => {
     const params = window.location.search.replace('%20', ' ').slice(1)
     updateSearch(params)
+    searchForItem(params)
   }, [])
 
   const searches = {

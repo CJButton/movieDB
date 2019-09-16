@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import Tabs from '../Components/Tabs'
 import Results from '../Components/Results'
@@ -10,11 +10,6 @@ import Search from '../Components/Search'
 const MovieSearch = () => {
   const [searchType, updateSearchType] = useState('movie')
   const [searchResults, updateResults] = useState({movie: [], tv: [], people: []})
-
-  useEffect(() => {
-    const params = window.location.search.replace('%20', ' ').slice(1)
-    fetchQuery(params)
-  }, [])
 
   const fetchQuery = async (query) => {
     if(!query) return
