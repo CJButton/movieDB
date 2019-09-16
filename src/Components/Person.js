@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row } from 'reactstrap'
+import TruncateText from './TruncateText'
 
 import { fetchExtrasInfo } from '../requests'
 // import PropTypes from 'prop-types'
@@ -8,7 +9,7 @@ import { fetchExtrasInfo } from '../requests'
  * Person
  */
 const Person = ({id, name, known_for_department, gender}) => {
-  const [bio, updateBio] = useState(null)
+  const [bio, updateBio] = useState('')
   const displayGender = () => {
     switch(gender) {
       case 1:
@@ -47,7 +48,7 @@ const Person = ({id, name, known_for_department, gender}) => {
         }
       </Row>
       <Row>
-        <p className='person-bio'>{bio}</p>
+        <TruncateText text={bio} />
       </Row>
     </div>
   )

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row } from 'reactstrap'
 import Ratings from './Ratings'
+import TruncateText from './TruncateText'
 
 import { fetchExtrasInfo } from '../requests'
 // import PropTypes from 'prop-types'
@@ -41,7 +42,9 @@ const TV = (props) => {
             { totalRuntime && <p className='movie-runtime'>Runtime: {totalRuntime}</p>}
         </Row>
         <Row>
-          <p className='movie-overview'>{props.overview}</p>
+          <p className='movie-overview'>
+            <TruncateText text={props.overview} />
+          </p>
         </Row>
       </div>
       <Row className='movie-ratings'>

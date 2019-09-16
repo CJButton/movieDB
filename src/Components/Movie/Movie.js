@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Row } from 'reactstrap'
 import Ratings from '../Ratings'
 import Preview from './Preview'
+import TruncateText from '../TruncateText'
 
 import { fetchMovieExtras } from '../../requests'
-// import PropTypes from 'prop-types'
 
 const Movie = (props) => {
   const [filmExtras, updateExtras] = useState({runtime: null, director: null, filmPreview: null})
@@ -34,7 +34,9 @@ const Movie = (props) => {
           { totalRuntime && <p className='movie-runtime'>Runtime: {totalRuntime}</p>}
         </Row>
         <Row>
-          <p className='movie-overview'>{props.overview}</p>
+          <p className='movie-overview'>
+            <TruncateText text={props.overview} />
+          </p>
         </Row>
       </div>
       <Row className='movie-ratings'>
