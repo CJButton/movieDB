@@ -8,17 +8,13 @@ import { fetchExtrasInfo } from '../requests'
 /**
  * Person
  */
-const Person = ({id, name, known_for_department, gender}) => {
+const Person = (props) => {
+  const {id, name, known_for_department, gender} = props
   const [bio, updateBio] = useState('')
-  const displayGender = () => {
-    switch(gender) {
-      case 1:
-        return 'Female'
-      case 2:
-        return 'Male'
-      default:
-        return 'Not specified'
-    }
+
+  const renderGender = {
+    1: 'Female',
+    2: 'Male',
   }
 
   useEffect(() => {
@@ -43,7 +39,7 @@ const Person = ({id, name, known_for_department, gender}) => {
         { known_for_department && !!gender && <p className='extras_hyphen'>-</p> }
         { !!gender && 
           <p className='person-gender'>
-            Gender: {displayGender()}
+            Gender: { renderGender[gender] || 'Not specified' }
           </p>
         }
       </Row>

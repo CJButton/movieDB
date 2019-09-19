@@ -11,19 +11,12 @@ import { Row, Col } from 'reactstrap';
  * 
  */
 const Results = ({searchResults, searchType}) => {
-  const selectComponent = (props) => {
-    switch(searchType) {
-      case 'movie':
-        return <Movie {...props} />
-      case 'tv':
-          return <TV {...props} />
-      case 'person':
-          return <Person {...props} />
-      default:
-        return null
-    }
+  const componentTree = {
+    tv: TV,
+    movie: Movie,
+    person: Person, 
   }
-
+  const SelectedComponent = componentTree[searchType]
   return (
     <div className='results-wrapper'>
       {searchResults.length ? 
@@ -37,7 +30,7 @@ const Results = ({searchResults, searchType}) => {
                 title={item.title || item.name} />
             </Col>
             <Col xs='9'>
-              {selectComponent(item)}
+              { <SelectedComponent {...item} /> }
             </Col>
           </Row>
         </div>
