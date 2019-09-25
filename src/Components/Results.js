@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Movie from './Movie/Movie'
+import Movie from './Movie'
 import TV from './TV'
 import Person from './Person'
 import ImageDisplay from './ImageDisplay'
@@ -8,7 +8,6 @@ import { Row, Col } from 'reactstrap';
 
 /**
  * Parent component for Results
- * 
  */
 const Results = ({searchResults, searchType}) => {
   const componentTree = {

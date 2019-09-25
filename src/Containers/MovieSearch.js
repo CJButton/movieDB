@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Tabs from '../Components/Tabs'
 import Results from '../Components/Results'
@@ -8,14 +8,27 @@ import TAB_ITEMS from './TabItems'
 import Search from '../Components/Search'
 
 const MovieSearch = () => {
-  const [searchType, updateSearchType] = useState('movie')
+  const [searchType, updateSearchType] = useState('')
   const [searchResults, updateResults] = useState({movie: [], tv: [], people: []})
+
+  useEffect(() => {
+    const searchParams = window.location.search.replace('%20', ' ').slice(1)
+    fetchQuery(searchParams)
+  }, [])
+
+  const setTab = (searchType) => {
+    updateSearchType(searchType)
+    const query = window.location.search ? `?${window.location.search.replace('%20', ' ').slice(1)}` : ''
+    const builtUpURL =  `${searchType}${query}`
+    window.history.pushState('', "query", `${builtUpURL}`)
+  }
 
   const fetchQuery = async (query) => {
     if(!query) return
     const res = await fetchSearchResults(query)
 
-    window.history.pushState('', "query", `?${query}`)
+    const type = searchType || window.location.pathname.slice(1)
+    window.history.pushState('', "query", `${type}?${query}`)
 
     if(res.statusCode) throw new Error(res.status_message)
 
@@ -27,9 +40,11 @@ const MovieSearch = () => {
   return (
     <div className="App">
       <Tabs
+        initialTab={window.location.pathname.slice(1)}
         tabItems={TAB_ITEMS} 
-        setParentTab={updateSearchType} />
-      <Search 
+        setParentTab={setTab} />
+      <Search
+        initialSearch={window.location.search.replace('%20', ' ').slice(1)}
         searchForItem={fetchQuery}
         searchType={searchType} />
       <Results
