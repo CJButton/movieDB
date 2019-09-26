@@ -47,7 +47,7 @@ const ResultBody = (props) => {
         </Row>
       </div>
       <Row className='movie-ratings'>
-        { props.voteAverage && <Ratings votes={props.voteAverage} />}
+        { props.displayVotes && <Ratings votes={props.voteAverage} />}
         { props.preview && <Preview previewID={props.preview} />}
       </Row>
     </div>
@@ -65,6 +65,7 @@ ResultBody.propTypes = {
   overview: PropTypes.string.isRequired,
   preview: PropTypes.string,
   voteAverage: PropTypes.number,
+  displayVotes: PropTypes.bool,
 }
 
 ResultBody.defaultProps = {
@@ -73,4 +74,5 @@ ResultBody.defaultProps = {
   rightOfHyphen: null,
   preview: null,
   voteAverage: null,
+  displayVotes: true,
 }

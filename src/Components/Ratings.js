@@ -18,7 +18,7 @@ const Ratings = ({votes}) => {
   }
 
   const userRatings = voteTotal ? `${voteTotal}%` : 'Not Rated'
-
+  
   return (
     <div className='ratings'>
       <div className='ratings_number'>User Rating: <b>{userRatings}</b></div>

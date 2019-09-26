@@ -30,18 +30,8 @@ const Person = (props) => {
       leftOfHyphen={known_for_department}
       rightOfHyphen={renderGender[gender] || 'Not specified'}
       overview={bio}
+      displayVotes='false'
     />
-    // <div className='person-wrapper'>
-    //   <Row><h5 className='person-name'>{name}</h5></Row>
-    //   <Row className='person-extras'>
-    //     { !!known_for_department && <p className='person-department'>Known for: {known_for_department}</p> }
-    //     { !!known_for_department && !!gender && <p className='extras_hyphen'>-</p> }
-    //     { !!gender && <p className='person-gender'>Gender: { renderGender[gender] || 'Not specified' }</p> }
-    //   </Row>
-    //   <Row>
-    //     <TruncateText text={bio} />
-    //   </Row>
-    // </div>
   )
 }
 
