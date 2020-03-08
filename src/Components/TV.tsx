@@ -34,7 +34,6 @@ const TV = (props: TVType) => {
       const { created_by, overview, first_air_date, episode_run_time }: TVInterface = await fetchExtrasInfo('tv', props.id)
 
       const createdBy = created_by.map(({ name }) => name).join(', ')
-      console.log(episode_run_time, 'episode run time')
       const runTime = episode_run_time.length ? episode_run_time : null
 
       updateExtras({createdBy, overview, first_air_date, episode_run_time: runTime})
