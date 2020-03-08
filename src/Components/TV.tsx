@@ -17,6 +17,13 @@ interface ExtrasInterface {
   episode_run_time: null | Array<number>
 }
 
+interface TVInterface {
+  created_by: Array<{ name: string }>,
+  overview: string,
+  first_air_date: string,
+  episode_run_time: Array<number>
+}
+
 const TV = (props: TVType) => {
   const [tvExtras, updateExtras] = useState<ExtrasInterface>(
     {createdBy: null, overview: null, first_air_date: null, episode_run_time: null }
@@ -24,9 +31,9 @@ const TV = (props: TVType) => {
 
   useEffect(() => {
     const fetchExtras = async () => {
-      const {created_by, overview, first_air_date, episode_run_time} = await fetchExtrasInfo('tv', props.id)
-      
-      const createdBy = created_by ? created_by.map((person: any) => (person.name)).join(', ') : null
+      const { created_by, overview, first_air_date, episode_run_time }: TVInterface = await fetchExtrasInfo('tv', props.id)
+
+      const createdBy = created_by.map(({ name }) => name).join(', ')
       const runTime = episode_run_time.length ? episode_run_time : null
 
       updateExtras({createdBy, overview, first_air_date, episode_run_time: runTime})
