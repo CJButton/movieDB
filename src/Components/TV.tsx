@@ -3,23 +3,39 @@ import ResultBody from './ResultBody'
 
 import { fetchExtrasInfo } from '../requests'
 
-const TV = (props) => {
-  const [tvExtras, updateExtras] = useState(
+type TVType = {
+  id: string,
+  name: string,
+  overview: string,
+  vote_average: number
+}
+
+interface ExtrasInterface {
+  createdBy: null | string,
+  overview: null | string,
+  first_air_date: null | string,
+  episode_run_time: null | Array<number>
+}
+
+const TV = (props: TVType) => {
+  const [tvExtras, updateExtras] = useState<ExtrasInterface>(
     {createdBy: null, overview: null, first_air_date: null, episode_run_time: null }
   )
-
-  const year = tvExtras.first_air_date ? `(${tvExtras.first_air_date.split('-')[0]})` : null
-  const totalRuntime = tvExtras.episode_run_time ? `${tvExtras.episode_run_time[0]} min` : null
 
   useEffect(() => {
     const fetchExtras = async () => {
       const {created_by, overview, first_air_date, episode_run_time} = await fetchExtrasInfo('tv', props.id)
-      const createdBy = created_by ? created_by.map(person => (person.name)).join(', ') : null
+      
+      const createdBy = created_by ? created_by.map((person: any) => (person.name)).join(', ') : null
       const runTime = episode_run_time.length ? episode_run_time : null
+
       updateExtras({createdBy, overview, first_air_date, episode_run_time: runTime})
     }
     fetchExtras()
   }, [props.id])
+  
+  const year = tvExtras.first_air_date ? `(${tvExtras.first_air_date.split('-')[0]})` : null
+  const totalRuntime = tvExtras.episode_run_time ? `${tvExtras.episode_run_time[0]} min` : null
 
   return(
     <ResultBody

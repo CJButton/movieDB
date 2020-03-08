@@ -1,22 +1,30 @@
 
 import React, { useState } from 'react'
 import { Button } from 'reactstrap';
-import PropTypes from 'prop-types'
 
 /**
  * Search Component
  * Displays search text and fires request for search
  */
-const Search = ({searchForItem, searchType, initialSearch}) => {
-  const [currentSearch, updateSearch] = useState(initialSearch)
+type SearchType = {
+  initialSearch: string,
+  searchForItem: (query: string) => Promise<void>,
+  searchType: string
+}
 
-  const searches = {
+interface SearchInterface {
+  [key: string]: string
+}
+const Search = ({initialSearch, searchForItem, searchType}: SearchType) => {
+  const [currentSearch, updateSearch] = useState(initialSearch || '')
+
+  const searches: SearchInterface = {
     'movie': ' a movie...',
     'tv': ' a tv show...',
     'person': ' people...',
   }
 
-  const updateCurrentSearch = (e) => {
+  const updateCurrentSearch = (e: React.KeyboardEvent) => {
     if(e.keyCode === 13) searchForItem(currentSearch)
   }
 
@@ -39,16 +47,6 @@ const Search = ({searchForItem, searchType, initialSearch}) => {
         </Button>
       </div>
   )
-}
-
-Search.propTypes = {
-  searchType: PropTypes.string.isRequired,
-  searchForItem: PropTypes.func.isRequired,
-  initialSearch: PropTypes.string,
-}
-
-Search.defaultProps = {
-  initialSearch: '',
 }
 
 export default Search
