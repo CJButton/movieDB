@@ -4,7 +4,7 @@ const HTTP_HEADER = { 'Content-Type': 'application/json',
                     };
 
 const MOVIE_DB_URL = 'https://api.themoviedb.org/3'
-const API_KEY = 'a3278e53efab52ff2751ae5a39636b4c'
+const API_KEY = process.env.REACT_APP_API_KEY
 const LANGUAGE = '&language=en-US&'
 const PAGE = '&page=1'
 const ADULT = '&include_adult=false'
