@@ -30,7 +30,7 @@ const MovieSearch = () => {
     const type = searchType || window.location.pathname.slice(1)
     window.history.pushState('', "query", `${type}?${query}`)
 
-    if(res.statusCode) throw new Error(res.status_message)
+    if(res.status_message) throw new Error(res.status_message)
 
     const values = {movie: [], tv: [], person: []}
     await res.results.map(media => values[media.media_type].push(media))
