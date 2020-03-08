@@ -3,14 +3,27 @@ import ResultBody from './ResultBody'
 
 import { fetchMovieExtras } from '../requests'
 
-const Movie = (props) => {
-  const [filmExtras, updateExtras] = useState({runtime: null, director: null, filmPreview: null})
+type MovieType = {
+  id: string,
+  release_date: string,
+  title: string,
+  overview: string,
+  vote_average: number
+}
 
+interface FetchMovieExtrasInterface {
+  runtime: number | null,
+  director: string | null,
+  filmPreview: string | null
+}
+
+const Movie = (props: MovieType) => {
+  const [filmExtras, updateExtras] = useState<FetchMovieExtrasInterface>({ runtime: null, director: null, filmPreview: null })
   const year = props.release_date ? props.release_date.split('-')[0] : null
 
   useEffect(() => {
     const fetchExtras = async () => {
-      const { runtime, director, filmPreview} = await fetchMovieExtras(props.id)
+      const { runtime, director, filmPreview }: FetchMovieExtrasInterface = await fetchMovieExtras(props.id)
       updateExtras({runtime, director, filmPreview})
     }
     fetchExtras()
