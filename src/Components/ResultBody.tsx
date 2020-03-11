@@ -3,7 +3,6 @@ import { Row } from 'reactstrap'
 import Ratings from './Ratings'
 import Preview from './Preview'
 import TruncateText from './TruncateText'
-// import PropTypes from 'prop-types'
 
 type ResultsBodyType = {
   header: string,
@@ -51,6 +50,8 @@ const ResultBody = (props: ResultsBodyType) => {
       right: 'Gender: ',
     },
   }
+
+  // Move the hyphen section to another component
   
   return(
     <div className='type-wrapper'>
@@ -61,10 +62,12 @@ const ResultBody = (props: ResultsBodyType) => {
             <h5 className='type-year'>{subtitle}</h5>}
         </Row>
         <Row className='movie-extras'>
-          { !!leftOfHyphen && <p className='movie-director'>
+          { !!leftOfHyphen && 
+            <p className='movie-director'>
               {hyphenText[type].left}
               {leftOfHyphen}
-            </p>}
+            </p>
+          }
           { !!leftOfHyphen && !!rightOfHyphen && <p className='extras_hyphen'>-</p> }
           { !!rightOfHyphen && <p className='movie-runtime'>
               {hyphenText[type].right}
@@ -73,7 +76,9 @@ const ResultBody = (props: ResultsBodyType) => {
         </Row>
         <Row>
           <p className='movie-overview'>
-            <TruncateText text={overview} />
+            <TruncateText>
+            { overview}
+            </TruncateText>
           </p>
         </Row>
       </div>
