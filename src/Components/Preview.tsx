@@ -3,7 +3,11 @@ import { Button } from 'reactstrap'
 import classnames from 'classnames'
 import ReactPlayer from 'react-player'
 
-const Preview = ({previewID}) => {
+type Preview = {
+  previewID: string;
+}
+
+const Preview = ({previewID}: Preview) => {
   const [isPlayerOpen, updatePlayer] = useState(false)
 
   const displayIcon = !isPlayerOpen ? 'fa-play' : 'fa-times'

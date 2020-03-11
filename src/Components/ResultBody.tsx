@@ -77,7 +77,7 @@ const ResultBody = (props: ResultsBodyType) => {
         <Row>
           <p className='movie-overview'>
             <TruncateText>
-            { overview}
+              { overview }
             </TruncateText>
           </p>
         </Row>
