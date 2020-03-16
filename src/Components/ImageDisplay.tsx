@@ -3,7 +3,14 @@ import classnames from 'classnames'
 import LazyLoad from 'react-lazy-load';
 import noImage from '../noImage.png'
 
-const ImageDisplay = ({image, title}) => {
+type ImageDisplayProps = {
+  image: string;
+  title: string;
+}
+
+
+const ImageDisplay = ({image, title}: ImageDisplayProps) => {
+
     const source = image 
     ? `https://image.tmdb.org/t/p/original/${image}`
     : noImage

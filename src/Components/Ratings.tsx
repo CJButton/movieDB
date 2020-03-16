@@ -1,7 +1,15 @@
 import React from 'react'
 import { Line } from 'rc-progress'
 
-const Ratings = ({votes}) => {
+type Ratings = {
+  votes: number | null;
+}
+
+const Ratings = ({ votes} : Ratings) => {
+
+  if(!votes) {
+    return null
+  }
 
   const voteTotal = votes * 10
   const strokeColors = () => {
@@ -24,7 +32,7 @@ const Ratings = ({votes}) => {
       <div className='ratings_number'>User Rating: <b>{userRatings}</b></div>
       <Line
         percent={voteTotal} 
-        strokeWidth="3" 
+        strokeWidth={3} 
         strokeColor={`#${strokeColors()}`} />
     </div>
   )

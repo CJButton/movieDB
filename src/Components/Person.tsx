@@ -6,18 +6,29 @@ import { fetchExtrasInfo } from '../requests'
 /**
  * Person
  */
-const Person = (props) => {
+type PersonType = {
+  id: string,
+  name: string,
+  known_for_department: string,
+  gender: number
+}
+
+interface RenderGender {
+  [key: string]: string
+}
+
+const Person = (props: PersonType) => {
   const {id, name, known_for_department, gender} = props
   const [bio, updateBio] = useState('')
 
-  const renderGender = {
+  const renderGender: RenderGender = {
     1: 'Female',
     2: 'Male',
   }
 
   useEffect(() => {
     const fetchExtras = async () => {
-      const {biography} = await fetchExtrasInfo('person', id)
+      const { biography }: { biography: string} = await fetchExtrasInfo('person', id)
       updateBio(biography)
     }
     fetchExtras()
@@ -30,7 +41,7 @@ const Person = (props) => {
       leftOfHyphen={known_for_department}
       rightOfHyphen={renderGender[gender] || 'Not specified'}
       overview={bio}
-      displayVotes='false'
+      displayVotes={false}
     />
   )
 }

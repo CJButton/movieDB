@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Movie from './Movie'
 import TV from './TV'
 import Person from './Person'
@@ -9,13 +8,24 @@ import { Row, Col } from 'reactstrap';
 /**
  * Parent component for Results
  */
-const Results = ({searchResults, searchType}) => {
-  const componentTree = {
+type ResultsType = {
+  searchResults: Array<any>,
+  searchType: string
+}
+
+interface ComponentTree {
+  [key: string]: (props: any) => JSX.Element
+}
+const Results = ({ searchResults = [], searchType }: ResultsType) => {
+
+  const componentTree: ComponentTree = {
     tv: TV,
     movie: Movie,
     person: Person, 
   }
+
   const SelectedComponent = componentTree[searchType]
+
   return (
     <div className='results-wrapper'>
       {searchResults.length ? 
@@ -38,14 +48,6 @@ const Results = ({searchResults, searchType}) => {
       }
     </div>
   )
-}
-
-Results.propTypes = {
-  searchResults: PropTypes.array,
-}
-
-Results.defaultProps = {
-  searchResults: []
 }
 
 export default Results
