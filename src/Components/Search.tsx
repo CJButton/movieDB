@@ -12,11 +12,12 @@ type SearchType = {
   searchType: string
 }
 
-interface SearchInterface {
+type SearchInterface = {
   [key: string]: string
 }
+
 const Search = ({initialSearch, searchForItem, searchType}: SearchType) => {
-  const [currentSearch, updateSearch] = useState(initialSearch || '')
+  const [currentSearch, updateSearch] = useState(initialSearch)
 
   const searches: SearchInterface = {
     'movie': ' a movie...',

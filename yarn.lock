@@ -1358,6 +1358,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/classnames@^2.2.10":
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.10.tgz#cc658ca319b6355399efc1f5b9e818f1a24bf999"
+  integrity sha512-1UzDldn9GfYYEsWWnn/P4wkTlkZDH7lDb0wBMGbtIQc9zXEQq7FlKBdZUn6OBqD8sKZZ2RQO2mAjGpXiDGoRmQ==
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -1428,6 +1433,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-truncate@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@types/react-truncate/-/react-truncate-2.3.3.tgz#76dcea6a4a34db17c981dbe8e7515ae2b09fc997"
+  integrity sha512-wtbubWJSvT+A3zzacmxpXE1nkHKX0nybSXfwNTdHtBfwJEzm1Caau9AGAS6R7uBuYw0sHcK/DoqRALfSOexLew==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.9.23":
   version "16.9.23"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.23.tgz#1a66c6d468ba11a8943ad958a8cb3e737568271c"
@@ -1435,6 +1447,14 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/reactstrap@^8.4.2":
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-8.4.2.tgz#e7066d0e67e2924dab0a52c6aedcf922f2be53b6"
+  integrity sha512-ag4hfFqBZaeoNSSTKjCtedvdcO68QqqlBrFd3obg94JSmhgNTmHz50BvNJkf9NjSzx1yGTW4l/OyP/khLPKqww==
+  dependencies:
+    "@types/react" "*"
+    popper.js "^1.14.1"
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -7337,7 +7357,7 @@ pnp-webpack-plugin@1.5.0:
   dependencies:
     ts-pnp "^1.1.2"
 
-popper.js@^1.14.4:
+popper.js@^1.14.1, popper.js@^1.14.4:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
   integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
