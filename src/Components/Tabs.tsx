@@ -17,7 +17,7 @@ const Tabs = ({initialTab, tabItems, setParentTab}: TabsType) => {
 
   useEffect(() => {
     setParentTab(currentTab)
-  })
+  }, [currentTab, setParentTab])
 
   return (
     <Nav className='nav-wrapper' tabs fill>

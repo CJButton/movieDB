@@ -6,7 +6,7 @@ import { fetchSearchResults } from '../requests'
 import TAB_ITEMS from './TabItems'
 import Search from '../Components/Search'
 
-interface ResultsInterface {
+type ResultsInterface = {
   movie: Array<any>,
   tv: Array<any>,
   person: Array<any>,
@@ -18,23 +18,43 @@ const MovieSearch = () => {
   const [searchResults, updateResults] = useState<ResultsInterface>({ movie: [], tv: [], person: []});
 
   useEffect(() => {
-    const searchParams = window.location.search.replace('%20', ' ').slice(1)
-    fetchQuery(searchParams)
+    const queryValue = getQueryValue();
+
+    if (queryValue) {
+      fetchQuery(queryValue)
+    }
   }, [])
+
+  const getQueryValue = () => {
+    const searchParams = new URLSearchParams(window.location.search)
+    return searchParams.get('query')
+  }
+
+  const getTabValueFromUrl = () => {
+    return searchType || window.location.pathname.slice(1)
+  }
+
+  const setUrl = (query = '') => {
+    const tabValue = getTabValueFromUrl()
+    const queryValue = query || getQueryValue()
+    const state = { 'tab': tabValue, 'query': queryValue }
+
+    const builtUpURL = tabValue + (queryValue ? `?query=${queryValue}` : '');
+
+    window.history.pushState(state, '', builtUpURL)
+  }
 
   const setTab = (searchType: string) => {
     updateSearchType(searchType)
-    const query = window.location.search ? `?${window.location.search.replace('%20', ' ').slice(1)}` : ''
-    const builtUpURL =  `${searchType}${query}`
-    window.history.pushState('', "query", `${builtUpURL}`)
+    setUrl();
   }
 
   const fetchQuery = async (query: string) => {
     if(!query) return
-    const res = await fetchSearchResults(query)
 
-    const type = searchType || window.location.pathname.slice(1)
-    window.history.pushState('', "query", `${type}?${query}`)
+    const res = await fetchSearchResults(query)
+    setUrl(query)
+
     if(res.status_message) throw new Error(res.status_message)
 
     const values: ResultsInterface = { movie: [], tv: [], person: [] }
@@ -46,11 +66,11 @@ const MovieSearch = () => {
   return (
     <div className="App">
       <Tabs
-        initialTab={window.location.pathname.slice(1)}
+        initialTab={getTabValueFromUrl()}
         tabItems={TAB_ITEMS} 
         setParentTab={setTab} />
       <Search
-        initialSearch={window.location.search.replace('%20', ' ').slice(1)}
+        initialSearch={getQueryValue() || ''}
         searchForItem={fetchQuery}
         searchType={searchType} />
       <Results
