@@ -1,7 +1,7 @@
 
 /* ----- Tabs ------ */
 .nav-wrapper {
-  padding: 3em 0 0;
+  padding: 1em 0 0;
   background-color: #335267;
 }
 
@@ -46,8 +46,6 @@ li.nav-item:last-child {
 
 .input-icons {
   margin: 3em 0.5em 2em 0.5em;
-  display: flex;
-  flex-direction: row;
   padding: 0 50px;
 } 
 
@@ -56,17 +54,18 @@ li.nav-item:last-child {
   min-width: 40px; 
 } 
 
-.input-field { 
-  width: 100%; 
-  padding: 5px; 
-  padding-left: 30px;
-  border-width: 1px;
-  border-radius: 5px 0 0 5px;
-  background-color: #F9FBFC;
-  box-shadow: none;
-} 
+Input.input-field {
+    width: calc(100% - 125px);
+    padding: 5px; 
+    padding-left: 30px;
+    border-width: 1px;
+    border-radius: 5px 0 0 5px;
+    background-color: #F9FBFC;
+    box-shadow: none;
+    border-right: none;
+}
 
-.input-field:focus {
+Input.input-field:focus {
   border-color: #527187;
   background-color: white;
   border-width: 1px;
@@ -77,8 +76,7 @@ li.nav-item:last-child {
 Button.search-button {
   color: #335267;
   background-color: white;
-  border-radius: 0 5px 5px 0;
-  height: 36px;
+  border-radius: 0 4px 4px 0;
   width: 122px;
 }
 

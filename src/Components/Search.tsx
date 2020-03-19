@@ -1,53 +1,57 @@
 
 import React, { useState } from 'react'
-import { Button } from 'reactstrap';
+import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
 
 /**
  * Search Component
  * Displays search text and fires request for search
  */
 type SearchType = {
-  initialSearch: string,
-  searchForItem: (query: string) => Promise<void>,
-  searchType: string
+    initialSearch: string,
+    searchForItem: (query: string) => Promise<void>,
+    searchType: string
 }
 
 type SearchInterface = {
-  [key: string]: string
+    [key: string]: string
 }
 
-const Search = ({initialSearch, searchForItem, searchType}: SearchType) => {
-  const [currentSearch, updateSearch] = useState(initialSearch)
-
-  const searches: SearchInterface = {
+const searches: SearchInterface = {
     'movie': ' a movie...',
     'tv': ' a tv show...',
     'person': ' people...',
-  }
+}
 
-  const updateCurrentSearch = (e: React.KeyboardEvent) => {
-    if(e.keyCode === 13) searchForItem(currentSearch)
-  }
+const Search = ({initialSearch, searchForItem, searchType}: SearchType) => {
+const [currentSearch, updateSearch] = useState(initialSearch)
 
-  const searchForType = searches[searchType] || '...'
+const searchForType = searches[searchType] || '...'
 
-  return (
-      <div className="input-icons"> 
-        <i className="fa fa-search icon"></i>
-        <input
-          placeholder={`Search for${searchForType}`}
-          onKeyUp={(e) => updateCurrentSearch(e)}
-          onChange={(e) => updateSearch(e.target.value)}
-          className="input-field"
-          value={currentSearch}
-          type="text" />
-        <Button 
-          className='search-button'
-          onClick={() => searchForItem(currentSearch)}>
-          Search
-        </Button>
-      </div>
-  )
+return (
+    <div className="input-icons"> 
+        <Form onSubmit={() => searchForItem(currentSearch)}>
+            <FormGroup>
+                <Row>
+                    <i className="fa fa-search icon"></i>
+                    <Input
+                        placeholder={`Search for${searchForType}`}
+                        type="text" 
+                        name="query"
+                        onChange={(e) => updateSearch(e.target.value)}
+                        className="input-field"
+                        value={currentSearch}
+                    />
+                    <Button 
+                        className='search-button'
+                        type="submit"
+                        onClick={() => searchForItem(currentSearch)}>
+                        Search
+                    </Button>
+                </Row>
+            </FormGroup>
+        </Form>
+    </div>
+)
 }
 
 export default Search
