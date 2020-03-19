@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Tabs from '../Components/Tabs'
 import Results from '../Components/Results'
-import { fetchSearchResults } from '../requests'
+import { fetchSearchResults, fetchTrending } from '../requests'
 import TAB_ITEMS from './TabItems'
 import Search from '../Components/Search'
 
@@ -17,13 +17,26 @@ const MovieSearch = () => {
   const [searchType, updateSearchType] = useState('')
   const [searchResults, updateResults] = useState<ResultsInterface>({ movie: [], tv: [], person: []});
 
-  useEffect(() => {
-    const queryValue = getQueryValue();
+    useEffect(() => {
+        const setInitials = async () => {
+            const queryValue = getQueryValue();
+            if (queryValue) {
+                return fetchQuery(queryValue)
+            }
 
-    if (queryValue) {
-      fetchQuery(queryValue)
-    }
-  }, [])
+            const trending = await fetchTrending();
+            setResults(trending);
+        }
+        setInitials();
+
+    }, []);
+
+  const setResults = (media: any) => {
+    const values: ResultsInterface = { movie: [], tv: [], person: [] }
+    media.results.map((media: any) => values[media.media_type].push(media))
+
+    updateResults(values)
+  }
 
   const getQueryValue = () => {
     const searchParams = new URLSearchParams(window.location.search)
@@ -52,15 +65,12 @@ const MovieSearch = () => {
   const fetchQuery = async (query: string) => {
     if(!query) return
 
-    const res = await fetchSearchResults(query)
+    const multi = await fetchSearchResults(query)
     setUrl(query)
 
-    if(res.status_message) throw new Error(res.status_message)
+    if(multi.status_message) throw new Error(multi.status_message)
 
-    const values: ResultsInterface = { movie: [], tv: [], person: [] }
-    await res.results.map((media: any) => values[media.media_type].push(media))
-
-    updateResults(values)
+    setResults(multi);
   }
 
   return (
