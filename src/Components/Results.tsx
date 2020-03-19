@@ -1,4 +1,5 @@
 import React from 'react'
+import LazyLoad from 'react-lazy-load';
 import Movie from './Movie'
 import TV from './TV'
 import Person from './Person'
@@ -26,28 +27,34 @@ const Results = ({ searchResults = [], searchType }: ResultsType) => {
 
   const SelectedComponent = componentTree[searchType]
 
-  return (
-    <div className='results-wrapper'>
-      {searchResults.length ? 
-        searchResults.map(item => (
-        <div key={item.id}>
-          <hr />
-          <Row className='results-wrapper-block'>
-            <Col xs='3'>
-              <ImageDisplay 
-                image={item.poster_path || item.profile_path}
-                title={item.title || item.name} />
-            </Col>
-            <Col xs='9'>
-              { <SelectedComponent {...item} /> }
-            </Col>
-          </Row>
+    return (
+        <div className='results-wrapper'>
+            {searchResults.length ? 
+            searchResults.map(item => (
+                <div key={item.id}>
+                    <hr />
+                    <Row className='results-wrapper-block'>
+                    <Col xs='3'>
+                        <ImageDisplay 
+                            image={item.poster_path || item.profile_path}
+                            title={item.title || item.name} />
+                    </Col>
+                    <Col xs='9'>
+                        <LazyLoad
+                            offsetVertical={500}
+                            debounce={false}
+                            once
+                        >
+                                { <SelectedComponent {...item} /> }
+                        </LazyLoad>
+                    </Col>
+                    </Row>
+                </div>
+            )) :
+                'No results to display'
+            }
         </div>
-      )) :
-          'No results to display'
-      }
-    </div>
-  )
+    )
 }
 
 export default Results
