@@ -20,7 +20,7 @@ const ImageDisplay = ({image, title}: ImageDisplayProps) => {
         <LazyLoad
           height={300}
           debounce={false}
-          offsetVertical={200}
+          offsetVertical={500}
           once
         >
           <img
