@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button } from 'reactstrap'
+import { Button, Modal, ModalBody, ModalFooter  } from 'reactstrap'
 import classnames from 'classnames'
 import ReactPlayer from 'react-player'
 
@@ -8,12 +8,12 @@ type Preview = {
 }
 
 const Preview = ({previewID}: Preview) => {
-  const [isPlayerOpen, updatePlayer] = useState(false)
+  const [isOpen, setOpen] = useState(false)
 
-  const displayIcon = !isPlayerOpen ? 'fa-play' : 'fa-times'
+  const displayIcon = !isOpen ? 'fa-play' : 'fa-times'
   const displayText = () => {
     switch(true) {
-      case isPlayerOpen:
+      case isOpen:
         return 'Close'
       case (!previewID):
         return 'Trailer Unavailable'
@@ -26,18 +26,29 @@ const Preview = ({previewID}: Preview) => {
     <>
       <Button 
         className={classnames('preview-button', { disabled: !previewID })}
-        onClick={() => updatePlayer(!isPlayerOpen)}>
+        onClick={() => setOpen(!isOpen)}>
           <div className='preview-elements-wrapper'>
             <i className={`preview-elements_icon fa ${displayIcon}`}></i>
             <div className='preview-elements_text'>{ displayText() }</div>
           </div>
       </Button>
 
-      {isPlayerOpen && 
-        <ReactPlayer 
-          url={`https://www.youtube.com/watch?v=${previewID}`} 
-          controls
-          playing />}
+      <Modal 
+        isOpen={isOpen} 
+        toggle={() => setOpen(!isOpen)}
+        className={classnames('modal-preview')}
+      >
+        <ModalBody>
+          <ReactPlayer 
+            url={`https://www.youtube.com/watch?v=${previewID}`} 
+            controls
+            // playing 
+          />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={() => setOpen(false)}>Close</Button>
+        </ModalFooter>
+      </Modal>
       </>
   )
 }

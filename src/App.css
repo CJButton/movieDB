@@ -160,6 +160,11 @@ Button.search-button:hover {
 
 /* Preview */
 
+div.modal-dialog.modal-preview {
+  width: 675px;
+  max-width: 1000px;
+}
+
 Button.preview-button {
   background-color: #82CA37;
   color: white;
