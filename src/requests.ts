@@ -15,9 +15,15 @@ const ADULT = '&include_adult=false'
  * @param {string} query 
  */
 export const fetchSearchResults = (query: string) => {
-  const method = 'GET'
-  const url = `search/multi?api_key=${API_KEY}${LANGUAGE}query=${query}${PAGE}${ADULT}`
-  return request(url, { method })
+    const method = 'GET'
+    const url = `search/multi?api_key=${API_KEY}${LANGUAGE}query=${query}${PAGE}${ADULT}`
+    return request(url, { method })
+}
+
+export const fetchTrending = () => {
+    const method = 'GET'
+    const url = `trending/all/day?api_key=${API_KEY}`
+    return request(url, { method })
 }
 
 const attachDirector = (credits: any) => {
