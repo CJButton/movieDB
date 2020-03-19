@@ -13,7 +13,7 @@ type ResultsType = {
   searchType: string
 }
 
-interface ComponentTree {
+type ComponentTree = {
   [key: string]: (props: any) => JSX.Element
 }
 const Results = ({ searchResults = [], searchType }: ResultsType) => {
@@ -44,7 +44,7 @@ const Results = ({ searchResults = [], searchType }: ResultsType) => {
           </Row>
         </div>
       )) :
-          'No results to display... Try typing something in the search bar and hit Enter!'
+          'No results to display'
       }
     </div>
   )

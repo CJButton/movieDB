@@ -11,7 +11,7 @@ type MovieType = {
   vote_average: number
 }
 
-interface FetchMovieExtrasInterface {
+type FetchMovieExtrasInterface = {
   runtime: number | null,
   director: string | null,
   filmPreview: string | null
