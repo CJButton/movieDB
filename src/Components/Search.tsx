@@ -8,7 +8,7 @@ import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
  */
 type SearchType = {
     initialSearch: string,
-    searchForItem: (query: string) => Promise<void>,
+    searchForItem: (query: string) => void,
     searchType: string
 }
 

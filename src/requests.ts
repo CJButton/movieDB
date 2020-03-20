@@ -26,6 +26,12 @@ export const fetchTrending = () => {
     return request(url, { method })
 }
 
+export const fetchType = (type: string, query: string) => {
+    const method = 'GET'
+    const url = `search/${type}?api_key=${API_KEY}${LANGUAGE}query=${query}${PAGE}`
+    return request(url, { method })
+}
+
 const attachDirector = (credits: any) => {
   if (!credits.crew) return null
   const director = credits.crew.find((crewPerson: any) => {
