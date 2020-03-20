@@ -34,20 +34,20 @@ const Results = ({ searchResults = [], searchType }: ResultsType) => {
                 <div key={item.id}>
                     <hr />
                     <Row className='results-wrapper-block'>
-                    <Col xs='3'>
-                        <ImageDisplay 
-                            image={item.poster_path || item.profile_path}
-                            title={item.title || item.name} />
-                    </Col>
-                    <Col xs='9'>
-                        <LazyLoad
-                            offsetVertical={500}
-                            debounce={false}
-                            once
-                        >
-                                { <SelectedComponent {...item} /> }
-                        </LazyLoad>
-                    </Col>
+                        <Col xs='3'>
+                            <ImageDisplay 
+                                image={item.poster_path || item.profile_path}
+                                title={item.title || item.name} />
+                        </Col>
+                        <Col xs='9'>
+                            <LazyLoad
+                                offsetVertical={500}
+                                debounce={false}
+                                once
+                                height={'100%'}>
+                                <SelectedComponent {...item} />
+                            </LazyLoad>
+                        </Col>
                     </Row>
                 </div>
             )) :
