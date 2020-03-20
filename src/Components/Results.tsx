@@ -72,13 +72,8 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
             if (currentPages[searchType].current === 1) return;
 
             try {
-                const results = await fetchType(searchType, query);
-
+                const results = await fetchType(searchType, query, 1);
                 setResults(results);
-                const pages = { ...currentPages }
-                pages[searchType].current = results.page
-                pages[searchType].total = results.total_pages
-                setCurrentPage(pages);
             } catch(error) {
                 console.error(error);
             }
@@ -86,12 +81,24 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
         getMediaList();
     }, [query, searchType]);
 
+    const fetchPage = async (page: number) => {
+        const results = await fetchType(searchType, query, page);
+        setResults(results);
+    }
+
     const setResults = (media: any) => {
-        const values = query === currentQuery ? searchResults : { movie: [], tv: [], person: [] };
+        // const values = query === currentQuery ? searchResults : { movie: [], tv: [], person: [] };
+        const values: MediaType = { movie: [], tv: [], person: [] };
         media.results.map((work: any) => values[work.media_type || searchType].push(work));
 
         setCurrentQuery(query)
         setSearchResults(values)
+
+        const pages = { ...currentPages }
+        pages[searchType].current = media.page
+        pages[searchType].total = media.total_pages
+
+        setCurrentPage(pages);
       }
 
     const componentTree: ComponentTree = {
@@ -107,7 +114,9 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
             {searchType && <Paginator
                 currentPage={currentPages[searchType].current}
                 totalPages={currentPages[searchType].total}
+                fetchPage={fetchPage}
             />}
+
             {searchType && searchResults[searchType].length ? 
                 searchResults[searchType].map(item => (
                     <div key={item.id}>
@@ -132,10 +141,6 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
                 )) :
                     'No results to display'
                 }
-            {searchType && <Paginator
-                currentPage={currentPages[searchType].current}
-                totalPages={currentPages[searchType].total}
-            />}
         </div>
     )
 }

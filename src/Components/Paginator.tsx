@@ -4,6 +4,7 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 type PaginationType = {
     currentPage: number
     totalPages: number
+    fetchPage: (arg0: number) => void
 }
 
 const beginningPages = (totalPages: number) => {
@@ -34,7 +35,7 @@ const getPaginationNumbers = (currentPage: number, totalPages: number) => {
     return middlePages(currentPage)
 }
 
-const PaginationElements = ({ currentPage, totalPages }: PaginationType) => {
+const PaginationElements = ({ currentPage, totalPages, fetchPage }: PaginationType) => {
     const paginationNumbers: any = getPaginationNumbers(currentPage, totalPages)
 
     return (
@@ -42,7 +43,7 @@ const PaginationElements = ({ currentPage, totalPages }: PaginationType) => {
             {paginationNumbers.map((page: any) => {
                 return (
                     <PaginationItem active={page === currentPage}>
-                        <PaginationLink href="#">
+                        <PaginationLink onClick={() => fetchPage(page)}>
                             { page }
                         </PaginationLink>
                     </PaginationItem>
@@ -52,27 +53,28 @@ const PaginationElements = ({ currentPage, totalPages }: PaginationType) => {
     )
 }
 
-const Paginator = ({ currentPage, totalPages }: PaginationType) => {
+const Paginator = ({ currentPage, totalPages, fetchPage }: PaginationType) => {
 
     return (
         <Pagination aria-label="Page navigation example">
             <PaginationItem>
-                <PaginationLink first href="#" />
+                <PaginationLink first onClick={() => fetchPage(1)} />
             </PaginationItem>
             <PaginationItem>
-                <PaginationLink previous href="#" />
+                <PaginationLink previous onClick={() => fetchPage(currentPage - 1)} />
             </PaginationItem>
 
             <PaginationElements 
                 currentPage={currentPage}
                 totalPages={totalPages}
+                fetchPage={fetchPage}
             />
 
             <PaginationItem>
-                <PaginationLink next href="#" />
+                <PaginationLink next onClick={() => fetchPage(currentPage + 1)} />
             </PaginationItem>
             <PaginationItem>
-                <PaginationLink last href="#" />
+                <PaginationLink last onClick={() => fetchPage(totalPages)} />
             </PaginationItem>
         </Pagination>
     )

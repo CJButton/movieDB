@@ -26,9 +26,9 @@ export const fetchTrending = () => {
     return request(url, { method })
 }
 
-export const fetchType = (type: string, query: string) => {
+export const fetchType = (type: string, query: string, page: number) => {
     const method = 'GET'
-    const url = `search/${type}?api_key=${API_KEY}${LANGUAGE}query=${query}${PAGE}`
+    const url = `search/${type}?api_key=${API_KEY}${LANGUAGE}query=${query}&page=${page.toString()}`
     return request(url, { method })
 }
 
