@@ -4,6 +4,7 @@ import Movie from './Movie'
 import TV from './TV'
 import Person from './Person'
 import ImageDisplay from './ImageDisplay'
+import Paginator from './Paginator'
 import { Row, Col } from 'reactstrap';
 import { fetchType, fetchTrending } from '../requests'
 
@@ -24,10 +25,22 @@ type MediaType = {
   }
 
   type PageType = {
-    movie: number,
-    tv: number,
-    person: number,
-    [key: string]: number
+    movie: {
+        current: number,
+        total: number
+    },
+    tv: {
+        current: number,
+        total: number
+    },
+    person: {
+        current: number,
+        total: number
+    },
+    [key: string]: {
+        current: number,
+        total: number
+    }
   }
 
 type ComponentTree = {
@@ -36,7 +49,11 @@ type ComponentTree = {
 const Results = ({ query, searchType, page = 1 }: ResultsType) => {
     const [searchResults, setSearchResults] = useState<MediaType>({ movie: [], tv: [], person: [] })
     const [currentQuery, setCurrentQuery] = useState('')
-    const [currentPages, setCurrentPage] = useState<PageType>({ movie: 0, tv: 0, person: 0 })
+    const [currentPages, setCurrentPage] = useState<PageType>({ 
+        movie: { current: 0, total: 0 }, 
+        tv: { current: 0, total: 0 },
+        person: { current: 0, total: 0 } 
+    })
 
     useEffect(() => {
         const getMediaList = async () => {
@@ -52,14 +69,15 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
 
             if (!searchType) return;
 
-            if (currentPages[searchType] === 1) return;
+            if (currentPages[searchType].current === 1) return;
 
             try {
                 const results = await fetchType(searchType, query);
 
                 setResults(results);
                 const pages = { ...currentPages }
-                pages[searchType] = results.page
+                pages[searchType].current = results.page
+                pages[searchType].total = results.total_pages
                 setCurrentPage(pages);
             } catch(error) {
                 console.error(error);
@@ -86,6 +104,10 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
 
     return (
         <div className='results-wrapper'>
+            {searchType && <Paginator
+                currentPage={currentPages[searchType].current}
+                totalPages={currentPages[searchType].total}
+            />}
             {searchType && searchResults[searchType].length ? 
                 searchResults[searchType].map(item => (
                     <div key={item.id}>
@@ -110,6 +132,10 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
                 )) :
                     'No results to display'
                 }
+            {searchType && <Paginator
+                currentPage={currentPages[searchType].current}
+                totalPages={currentPages[searchType].total}
+            />}
         </div>
     )
 }
