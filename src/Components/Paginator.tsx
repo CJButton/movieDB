@@ -58,10 +58,10 @@ const Paginator = ({ currentPage, totalPages, fetchPage }: PaginationType) => {
     return (
         <Pagination aria-label="Page navigation example">
             <PaginationItem>
-                <PaginationLink first onClick={() => fetchPage(1)} />
+                <PaginationLink first disabled={currentPage === 1} onClick={() => fetchPage(1)} />
             </PaginationItem>
             <PaginationItem>
-                <PaginationLink previous onClick={() => fetchPage(currentPage - 1)} />
+                <PaginationLink previous disabled={currentPage === 1} onClick={() => fetchPage(currentPage - 1)} />
             </PaginationItem>
 
             <PaginationElements 
@@ -71,10 +71,10 @@ const Paginator = ({ currentPage, totalPages, fetchPage }: PaginationType) => {
             />
 
             <PaginationItem>
-                <PaginationLink next onClick={() => fetchPage(currentPage + 1)} />
+                <PaginationLink next disabled={currentPage === totalPages} onClick={() => fetchPage(currentPage + 1)} />
             </PaginationItem>
             <PaginationItem>
-                <PaginationLink last onClick={() => fetchPage(totalPages)} />
+                <PaginationLink last disabled={currentPage === totalPages} onClick={() => fetchPage(totalPages)} />
             </PaginationItem>
         </Pagination>
     )

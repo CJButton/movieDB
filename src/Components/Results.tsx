@@ -14,7 +14,6 @@ import { fetchType, fetchTrending } from '../requests'
 type ResultsType = {
     query: string
     searchType: string
-    page?: number
 }
 
 type MediaType = {
@@ -25,30 +24,17 @@ type MediaType = {
   }
 
   type PageType = {
-    movie: {
-        current: number,
-        total: number
-    },
-    tv: {
-        current: number,
-        total: number
-    },
-    person: {
-        current: number,
-        total: number
-    },
-    [key: string]: {
-        current: number,
-        total: number
-    }
+    movie: { current: number, total: number },
+    tv: { current: number, total: number },
+    person: { current: number, total: number },
+    [key: string]: { current: number, total: number }
   }
 
 type ComponentTree = {
     [key: string]: (props: any) => JSX.Element
 }
-const Results = ({ query, searchType, page = 1 }: ResultsType) => {
+const Results = ({ query, searchType }: ResultsType) => {
     const [searchResults, setSearchResults] = useState<MediaType>({ movie: [], tv: [], person: [] })
-    const [currentQuery, setCurrentQuery] = useState('')
     const [currentPages, setCurrentPage] = useState<PageType>({ 
         movie: { current: 0, total: 0 }, 
         tv: { current: 0, total: 0 },
@@ -69,7 +55,7 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
 
             if (!searchType) return;
 
-            if (currentPages[searchType].current === 1) return;
+            // if (currentPages[searchType].current === 1 && !searchResults[searchType].length) return;
 
             try {
                 const results = await fetchType(searchType, query, 1);
@@ -87,12 +73,12 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
     }
 
     const setResults = (media: any) => {
-        // const values = query === currentQuery ? searchResults : { movie: [], tv: [], person: [] };
         const values: MediaType = { movie: [], tv: [], person: [] };
         media.results.map((work: any) => values[work.media_type || searchType].push(work));
 
-        setCurrentQuery(query)
         setSearchResults(values)
+
+        if (!query) return
 
         const pages = { ...currentPages }
         pages[searchType].current = media.page
@@ -109,38 +95,45 @@ const Results = ({ query, searchType, page = 1 }: ResultsType) => {
 
     const SelectedComponent = componentTree[searchType]
 
+    if (searchType && !searchResults[searchType].length) {
+        return (
+            <div className='results-wrapper'>
+                No results to display
+            </div>
+        );
+    }
+
     return (
         <div className='results-wrapper'>
-            {searchType && <Paginator
-                currentPage={currentPages[searchType].current}
-                totalPages={currentPages[searchType].total}
-                fetchPage={fetchPage}
-            />}
+            {query && searchType && (
+                <Paginator
+                    currentPage={currentPages[searchType].current}
+                    totalPages={currentPages[searchType].total}
+                    fetchPage={fetchPage}
+                />
+            )}
 
-            {searchType && searchResults[searchType].length ? 
-                searchResults[searchType].map(item => (
-                    <div key={item.id}>
-                        <hr />
-                        <Row className='results-wrapper-block'>
-                            <Col xs='3'>
-                                <ImageDisplay 
-                                    image={item.poster_path || item.profile_path}
-                                    title={item.title || item.name} />
-                            </Col>
-                            <Col xs='9'>
-                                <LazyLoad
-                                    offsetVertical={500}
-                                    debounce={false}
-                                    once
-                                    height={'100%'}>
-                                    <SelectedComponent {...item} />
-                                </LazyLoad>
-                            </Col>
-                        </Row>
-                    </div>
-                )) :
-                    'No results to display'
-                }
+            {searchResults[searchType] && searchResults[searchType].map(item => (
+                <div key={item.id}>
+                    <hr />
+                    <Row className='results-wrapper-block'>
+                        <Col xs='3'>
+                            <ImageDisplay 
+                                image={item.poster_path || item.profile_path}
+                                title={item.title || item.name} />
+                        </Col>
+                        <Col xs='9'>
+                            <LazyLoad
+                                offsetVertical={500}
+                                debounce={false}
+                                once
+                                height={'100%'}>
+                                <SelectedComponent {...item} />
+                            </LazyLoad>
+                        </Col>
+                    </Row>
+                </div>
+            ))}
         </div>
     )
 }
