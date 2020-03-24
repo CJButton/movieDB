@@ -6,23 +6,12 @@ const HTTP_HEADER = { 'Content-Type': 'application/json',
 const MOVIE_DB_URL = 'https://api.themoviedb.org/3'
 const API_KEY = process.env.REACT_APP_API_KEY
 const LANGUAGE = '&language=en-US&'
-const PAGE = '&page=1'
-const ADULT = '&include_adult=false'
 
 // Documentation: https://www.themoviedb.org/documentation/api
 
-/**
- * @param {string} query 
- */
-export const fetchSearchResults = (query: string) => {
+export const fetchTrending = (searchType: string) => {
     const method = 'GET'
-    const url = `search/multi?api_key=${API_KEY}${LANGUAGE}query=${query}${PAGE}${ADULT}`
-    return request(url, { method })
-}
-
-export const fetchTrending = () => {
-    const method = 'GET'
-    const url = `trending/all/day?api_key=${API_KEY}`
+    const url = `trending/${searchType}/day?api_key=${API_KEY}`
     return request(url, { method })
 }
 

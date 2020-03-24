@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import LazyLoad from 'react-lazy-load';
 import Movie from './Movie'
 import TV from './TV'
@@ -16,67 +16,27 @@ type ResultsType = {
     searchType: string
 }
 
-type MediaType = {
-    movie: Array<any>,
-    tv: Array<any>,
-    person: Array<any>,
-    [key: string]: Array<any>
-  }
-
-  type PageType = {
+type PageType = {
     movie: { current: number, total: number },
     tv: { current: number, total: number },
     person: { current: number, total: number },
     [key: string]: { current: number, total: number }
-  }
+}
 
 type ComponentTree = {
     [key: string]: (props: any) => JSX.Element
 }
 const Results = ({ query, searchType }: ResultsType) => {
-    const [searchResults, setSearchResults] = useState<MediaType>({ movie: [], tv: [], person: [] })
+
+    const [searchResults, setSearchResults] = useState([])
     const [currentPages, setCurrentPage] = useState<PageType>({ 
         movie: { current: 0, total: 0 }, 
         tv: { current: 0, total: 0 },
         person: { current: 0, total: 0 } 
     })
 
-    useEffect(() => {
-        const getMediaList = async () => {
-            if (!query) {
-                try {
-                    const trending = await fetchTrending();
-
-                    return setResults(trending);
-                } catch(error) {
-                    console.error(error)
-                }
-            }
-
-            if (!searchType) return;
-
-            // if (currentPages[searchType].current === 1 && !searchResults[searchType].length) return;
-
-            try {
-                const results = await fetchType(searchType, query, 1);
-                setResults(results);
-            } catch(error) {
-                console.error(error);
-            }
-        }
-        getMediaList();
-    }, [query, searchType]);
-
-    const fetchPage = async (page: number) => {
-        const results = await fetchType(searchType, query, page);
-        setResults(results);
-    }
-
-    const setResults = (media: any) => {
-        const values: MediaType = { movie: [], tv: [], person: [] };
-        media.results.map((work: any) => values[work.media_type || searchType].push(work));
-
-        setSearchResults(values)
+    const setResults = useCallback((media: any) => {
+        setSearchResults(media.results)
 
         if (!query) return
 
@@ -85,7 +45,28 @@ const Results = ({ query, searchType }: ResultsType) => {
         pages[searchType].total = media.total_pages
 
         setCurrentPage(pages);
-      }
+      }, [currentPages, query, searchType])
+
+    useEffect(() => {
+        if (!searchType) return
+
+        const getMediaList = async () => {
+            try {
+                const promise = !query ? fetchTrending(searchType) : fetchType(searchType, query, 1)
+
+                return setResults(await promise)
+            } catch(error) {
+                console.error(error)
+            }
+
+        }
+        getMediaList();
+    }, [query, searchType, setResults]);
+
+    const fetchPage = async (page: number) => {
+        const results = await fetchType(searchType, query, page);
+        setResults(results);
+    }
 
     const componentTree: ComponentTree = {
         tv: TV,
@@ -95,7 +76,7 @@ const Results = ({ query, searchType }: ResultsType) => {
 
     const SelectedComponent = componentTree[searchType]
 
-    if (searchType && !searchResults[searchType].length) {
+    if (!searchResults.length) {
         return (
             <div className='results-wrapper'>
                 No results to display
@@ -113,7 +94,7 @@ const Results = ({ query, searchType }: ResultsType) => {
                 />
             )}
 
-            {searchResults[searchType] && searchResults[searchType].map(item => (
+            {searchResults && searchResults.map((item: any) => (
                 <div key={item.id}>
                     <hr />
                     <Row className='results-wrapper-block'>

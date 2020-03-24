@@ -14,12 +14,12 @@ const MovieSearch = () => {
   const [searchType, updateSearchType] = useState('')
   const [query, updateQuery] = useState<string>(getQueryValue());
 
-    const getTabValueFromUrl = () => {
+    const getTabValue = () => {
         return searchType || window.location.pathname.slice(1)
     }
 
     const setUrl = (query = '') => {
-        const tabValue = getTabValueFromUrl()
+        const tabValue = getTabValue()
         const queryValue = query || getQueryValue()
         const state = { 'tab': tabValue, 'query': queryValue }
 
@@ -43,7 +43,7 @@ const MovieSearch = () => {
   return (
         <div className="App">
             <Tabs
-                initialTab={getTabValueFromUrl()}
+                initialTab={getTabValue()}
                 tabItems={TAB_ITEMS} 
                 setParentTab={setTab} />
             <Search
