@@ -10,18 +10,18 @@ type TVType = {
   vote_average: number
 }
 
-interface ExtrasInterface {
+type ExtrasInterface = {
   createdBy: null | string,
   overview: null | string,
   first_air_date: null | string,
   episode_run_time: null | Array<number>
 }
 
-interface TVInterface {
-  created_by: Array<{ name: string }>,
+type TVInterface = {
+  created_by?: Array<{ name: string }>,
   overview: string,
   first_air_date: string,
-  episode_run_time: Array<number>
+  episode_run_time?: Array<number>
 }
 
 const TV = (props: TVType) => {
@@ -33,8 +33,8 @@ const TV = (props: TVType) => {
     const fetchExtras = async () => {
       const { created_by, overview, first_air_date, episode_run_time }: TVInterface = await fetchExtrasInfo('tv', props.id)
 
-      const createdBy = created_by.map(({ name }) => name).join(', ')
-      const runTime = episode_run_time.length ? episode_run_time : null
+      const createdBy = created_by ? created_by.map(({ name }) => name).join(', ') : null
+      const runTime = episode_run_time && episode_run_time.length ? episode_run_time : null
 
       updateExtras({createdBy, overview, first_air_date, episode_run_time: runTime})
     }
@@ -44,17 +44,17 @@ const TV = (props: TVType) => {
   const year = tvExtras.first_air_date ? `(${tvExtras.first_air_date.split('-')[0]})` : null
   const totalRuntime = tvExtras.episode_run_time ? `${tvExtras.episode_run_time[0]} min` : null
 
-  return(
-    <ResultBody
-      type={'tv'}
-      header={props.name}
-      subtitle={year}
-      leftOfHyphen={tvExtras.createdBy}
-      rightOfHyphen={totalRuntime}
-      overview={props.overview}
-      voteAverage={props.vote_average}
-    />
-  )
+    return (
+        <ResultBody
+            type={'tv'}
+            header={props.name}
+            subtitle={year}
+            leftOfHyphen={tvExtras.createdBy}
+            rightOfHyphen={totalRuntime}
+            overview={props.overview}
+            voteAverage={props.vote_average}
+        />
+    )
 }
 
 export default TV
