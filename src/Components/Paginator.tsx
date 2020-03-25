@@ -11,7 +11,6 @@ const beginningPages = (totalPages: number) => {
     return [...Array(totalPages + 1).keys()].slice(1)
 }
 
-
 const middlePages = (currentPage: number) => {
     return [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2]
 }
@@ -37,18 +36,20 @@ const getPaginationNumbers = (currentPage: number, totalPages: number) => {
 }
 
 const PaginationElements = ({ currentPage, totalPages, fetchPage }: PaginationType) => {
-    const paginationNumbers: any = getPaginationNumbers(currentPage, totalPages)
+    const paginationNumbers = getPaginationNumbers(currentPage, totalPages)
 
     return (
-        paginationNumbers.map((page: any) => {
-            return (
-                <PaginationItem active={page === currentPage}>
-                    <PaginationLink onClick={() => fetchPage(page)}>
-                        { page }
-                    </PaginationLink>
-                </PaginationItem>
-            )
-        })
+        <>
+            {paginationNumbers.map((page: any) => {
+                return (
+                    <PaginationItem active={page === currentPage}>
+                        <PaginationLink onClick={() => fetchPage(page)}>
+                            { page }
+                        </PaginationLink>
+                    </PaginationItem>
+                )
+            })}
+        </>
     )
 }
 

@@ -5,6 +5,7 @@ import TV from './TV'
 import Person from './Person'
 import ImageDisplay from './ImageDisplay'
 import Paginator from './Paginator'
+import Loader from './Loader'
 import { Row, Col } from 'reactstrap';
 import { fetchType, fetchTrending } from '../requests'
 
@@ -16,47 +17,35 @@ type ResultsType = {
     searchType: string
 }
 
-type PageType = {
-    movie: { current: number, total: number },
-    tv: { current: number, total: number },
-    person: { current: number, total: number },
-    [key: string]: { current: number, total: number }
-}
-
 type ComponentTree = {
     [key: string]: (props: any) => JSX.Element
 }
 const Results = ({ query, searchType }: ResultsType) => {
-
     const [searchResults, setSearchResults] = useState([])
-    const [currentPages, setCurrentPage] = useState<PageType>({ 
-        movie: { current: 0, total: 0 }, 
-        tv: { current: 0, total: 0 },
-        person: { current: 0, total: 0 } 
-    })
+    const [currentPages, setCurrentPage] = useState({ current: 1, total: 0 })
+    const [loader, setLoader] = useState(true)
 
     const setResults = useCallback((media: any) => {
-        setSearchResults(media.results)
 
-        if (!query) return
+        const { results, page, total_pages } = media
+        setSearchResults(results)
+        setCurrentPage({ current: page, total: total_pages });
 
-        const pages = { ...currentPages }
-        pages[searchType].current = media.page
-        pages[searchType].total = media.total_pages
-
-        setCurrentPage(pages);
-      }, [currentPages, query, searchType])
+      }, [])
 
     useEffect(() => {
         if (!searchType) return
 
         const getMediaList = async () => {
+            setLoader(true)
             try {
                 const promise = !query ? fetchTrending(searchType) : fetchType(searchType, query, 1)
 
                 return setResults(await promise)
             } catch(error) {
                 console.error(error)
+            } finally {
+                setLoader(false)
             }
 
         }
@@ -86,15 +75,16 @@ const Results = ({ query, searchType }: ResultsType) => {
 
     return (
         <div className='results-wrapper'>
+            {loader && <Loader />}
             {query && searchType && (
                 <Paginator
-                    currentPage={currentPages[searchType].current}
-                    totalPages={currentPages[searchType].total}
+                    currentPage={currentPages.current}
+                    totalPages={currentPages.total}
                     fetchPage={fetchPage}
                 />
             )}
 
-            {searchResults && searchResults.map((item: any) => (
+            {searchResults.map((item: any) => (
                 <div key={item.id}>
                     <hr />
                     <Row className='results-wrapper-block'>
