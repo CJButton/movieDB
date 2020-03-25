@@ -15,7 +15,7 @@ const MovieSearch = () => {
   const [query, updateQuery] = useState<string>(getQueryValue());
 
     const getTabValue = () => {
-        return searchType || window.location.pathname.slice(1)
+        return searchType || window.location.pathname.slice(9)
     }
 
     const setUrl = (query = '') => {
@@ -23,8 +23,9 @@ const MovieSearch = () => {
         const queryValue = query || getQueryValue()
         const state = { 'tab': tabValue, 'query': queryValue }
 
-        const builtUpURL = tabValue + (queryValue ? `?query=${queryValue}` : '');
-
+        const builtUpURL = 'movieDB/' + tabValue + (queryValue ? `?query=${queryValue}` : '');
+        console.log(window.location, 'window location')
+        console.log(builtUpURL, 'builtUpURLbuiltUpURL')
         window.history.pushState(state, '', builtUpURL)
     }
 
