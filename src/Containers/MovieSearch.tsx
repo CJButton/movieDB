@@ -14,19 +14,15 @@ const MovieSearch = () => {
   const [searchType, updateSearchType] = useState('')
   const [query, updateQuery] = useState<string>(getQueryValue());
 
-    const getTabValue = () => {
-        return searchType || window.location.pathname.slice(9)
-    }
+    // const getTabValue = () => {
+    //     return searchType || window.location.pathname.slice(9)
+    // }
 
     const setUrl = (query = '') => {
-        const tabValue = getTabValue()
         const queryValue = query || getQueryValue()
-        const state = { 'tab': tabValue, 'query': queryValue }
 
-        const builtUpURL = 'movieDB/' + tabValue + (queryValue ? `?query=${queryValue}` : '');
-        console.log(window.location, 'window location')
-        console.log(builtUpURL, 'builtUpURLbuiltUpURL')
-        window.history.pushState(state, '', builtUpURL)
+        const urlQuery = queryValue ? `?query=${queryValue}` : ''
+        window.history.pushState('', '', `${searchType}${urlQuery}`)
     }
 
   const setTab = (searchType: string) => {
@@ -44,7 +40,7 @@ const MovieSearch = () => {
   return (
         <div className="App">
             <Tabs
-                initialTab={getTabValue()}
+                initialTab={''}
                 tabItems={TAB_ITEMS} 
                 setParentTab={setTab} />
             <Search

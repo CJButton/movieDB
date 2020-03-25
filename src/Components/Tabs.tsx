@@ -13,7 +13,7 @@ type TabsType = {
 }
 
 const Tabs = ({initialTab, tabItems, setParentTab}: TabsType) => {
-  const [currentTab, updateLocalTab] = useState<string>(initialTab || tabItems[0].value)
+  const [currentTab, updateLocalTab] = useState<string>(tabItems[0].value)
 
   useEffect(() => {
     setParentTab(currentTab)
