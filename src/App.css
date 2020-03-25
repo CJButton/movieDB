@@ -88,12 +88,29 @@ Button.search-button:hover {
 /* Results */
 
 .results-wrapper {
-  margin: 0 3.5em;
-  color: #2F4E5F;
+    position: relative;
+    margin: 0 3.5em;
+    color: #2F4E5F;
 }
 
 .results-wrapper-block {
-  margin: 2em 0;
+    margin: 2em 0;
+}
+
+.loader-wrapper {
+    position: absolute;
+    width: 101%;
+    background: white;
+    height: 100%;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.loader-icon {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 1%;
 }
 
 /* Movie */
