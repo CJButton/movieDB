@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
-/**
- * Tabs Component
- * Takes an array of objects
- * Updates the parent after selection
- */
+import { useHistory, useLocation } from 'react-router-dom'
+
 type TabsType = {
-  initialTab: string | undefined,
-  tabItems: Array<{title: string, value: string}>,
-  setParentTab: (arg0: string) => void
+    tabItems: Array<{ title: string, value: string }>
 }
 
-const Tabs = ({initialTab, tabItems, setParentTab}: TabsType) => {
-  const [currentTab, updateLocalTab] = useState<string>(tabItems[0].value)
+const Tabs = ({ tabItems }: TabsType) => {
+    const history = useHistory()
+    const location = useLocation()
+    const [currentTab, updateLocalTab] = useState(location.pathname.slice(1))
 
-  useEffect(() => {
-    setParentTab(currentTab)
-  }, [currentTab, setParentTab])
+    const redirectTo = (tabType: string) => {
+        updateLocalTab(tabType)
+        const search = location.search ? location.search: ''
+        history.push(`/${tabType}${search}`)
+    }
 
-  return (
-    <Nav className='nav-wrapper' tabs fill>
-      {tabItems.map((item => (
-        <NavItem 
-          className={classnames({ active: currentTab === item.value })}
-          key={`tab-item-${item.value}`}>
-          <NavLink
-            className={classnames({ active: currentTab === item.value })}
-            onClick={() => { updateLocalTab(item.value) }} >
-            <h5>{ item.title }</h5>
-          </NavLink>
-        </NavItem>
-      )))}
-    </Nav>
-  )
+    return (
+        <Nav className='nav-wrapper' tabs fill>
+            {tabItems.map((item => {
+                const { value, title } = item;
+                return (
+                    <NavItem 
+                        className={classnames({ active: currentTab === value })}
+                        key={`tab-item-${value}`}>
+                        <NavLink
+                            className={classnames({ active: currentTab === value })}
+                            onClick={() => { redirectTo(value) }} >
+                                <h5>{ title }</h5>
+                        </NavLink>
+                    </NavItem>
+                )
+            }))}
+        </Nav>
+    )
 }
 
 export default Tabs
