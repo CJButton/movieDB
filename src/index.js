@@ -5,7 +5,7 @@ import Wrapper from './Containers/Wrapper';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import { HashRouter, Route, Redirect } from "react-router-dom";
-import Results from './Components/Results'
+import Results from './Components/SearchResults'
 
 const Routes = () => {
     return (

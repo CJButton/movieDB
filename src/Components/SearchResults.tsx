@@ -15,10 +15,6 @@ const getQuery = (location: any) => {
     return params.get('query') || ''
 }
 
-// const useType = () => {
-//     return useLocation().pathname.slice(1)
-// }
-
 type ComponentTree = {
     [key: string]: (props: any) => JSX.Element
 }
@@ -82,18 +78,17 @@ const Results = () => {
             </div>
         );
     }
-
+    
     return (
         <div className='results-wrapper'>
             {loader && <Loader />}
-            {/* {query && searchType && ( */}
+            {query && (
                 <Paginator
                     currentPage={currentPages.current}
                     totalPages={currentPages.total}
                     fetchPage={fetchPage}
                 />
-            {/* )} */}
-
+            )}
             {searchResults.map((item: any) => (
                 <div key={item.id}>
                     <hr />
@@ -104,13 +99,15 @@ const Results = () => {
                                 title={item.title || item.name} />
                         </Col>
                         <Col xs='9'>
-                            <LazyLoad
-                                offsetVertical={200}
-                                debounce
-                                once
-                                height={'100%'}>
-                                <SelectedComponent {...item} />
-                            </LazyLoad>
+                            {!loader && (
+                                <LazyLoad
+                                    offsetVertical={200}
+                                    debounce
+                                    once
+                                    height={'100%'}>
+                                    <SelectedComponent {...item} />
+                                </LazyLoad>
+                            )}
                         </Col>
                     </Row>
                 </div>

@@ -13,6 +13,11 @@ const searches: SearchInterface = {
     'person': ' people...',
 }
 
+const getQuery = (location: any) => {
+    const params = new URLSearchParams(location.search)
+    return params.get('query') || ''
+}
+
 const Search = () => {
     const history = useHistory()
     const location = useLocation()
@@ -22,14 +27,19 @@ const Search = () => {
 
     useEffect(() => {
         const searchType = location.pathname.slice(1) || 'movie'
+        const searchParams = getQuery(location)
+
+        updateSearch(searchParams)
         updateType(searchType)
-    }, [location.pathname])
+    }, [location])
 
     const searchForType = searches[searchType] || '...'
 
     const searchForItem = (e: any) => {
         e.preventDefault()
-        const newQuery = `${location.pathname}?query=${currentSearch}`
+        const params = currentSearch ? `?query=${currentSearch}` : ''
+
+        const newQuery = `${location.pathname}${params}`
         history.push(newQuery)
     }
 

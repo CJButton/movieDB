@@ -42,7 +42,7 @@ const PaginationElements = ({ currentPage, totalPages, fetchPage }: PaginationTy
         <>
             {paginationNumbers.map((page: any) => {
                 return (
-                    <PaginationItem active={page === currentPage}>
+                    <PaginationItem active={page === currentPage} key={page}>
                         <PaginationLink onClick={() => fetchPage(page)}>
                             { page }
                         </PaginationLink>
