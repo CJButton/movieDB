@@ -1,4 +1,27 @@
 
+html, body, #root, #root>div {
+    height: 100%
+  }
+
+:root {
+    --bg-color: #191919;
+    --color-color: #ffffff;
+  }
+
+[data-theme="Light"] {
+    --bg-color: #ffffff;
+    --color-color: #191919;
+}
+
+.theme-switch {
+    margin: 1em 3em;
+    color: var(--color-color);
+}
+
+.App {
+    background-color: var(--bg-color);
+}
+
 /* ----- Tabs ------ */
 .nav-wrapper {
   padding: 1em 0 0;
@@ -89,7 +112,7 @@ Button.search-button:hover {
 
 .results-wrapper {
     position: relative;
-    margin: 0 3.5em;
+    margin: 0 3em;
     color: #2F4E5F;
 }
 

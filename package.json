@@ -15,6 +15,7 @@
     "@types/reactstrap": "^8.4.2",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "node-sass": "^4.13.1",
     "rc-progress": "^2.5.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
