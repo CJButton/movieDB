@@ -97,24 +97,19 @@ const Results = () => {
             {searchResults.map((item: any) => (
                 <div key={item.id}>
                     <hr />
-                    <Row className='results-wrapper-block'>
-                        <Col xs='3'>
-                            <ImageDisplay 
-                                image={item.poster_path || item.profile_path}
-                                title={item.title || item.name} />
-                        </Col>
-                        <Col xs='9'>
+                    <div className='results-wrapper-block'>
+                        <ImageDisplay 
+                            image={item.poster_path || item.profile_path}
+                            title={item.title || item.name} />
                             {!loader && (
                                 <LazyLoad
                                     offsetVertical={200}
                                     debounce
-                                    once
-                                    height={'100%'}>
+                                    once>
                                     <SelectedComponent {...item} />
                                 </LazyLoad>
                             )}
-                        </Col>
-                    </Row>
+                    </div>
                 </div>
             ))}
         </div>

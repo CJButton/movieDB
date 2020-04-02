@@ -163,6 +163,7 @@ Button.search-button:hover {
 }
 
 .results-wrapper-block {
+    display: flex;
     margin: 2em 0;
 }
 
@@ -221,6 +222,8 @@ Button.search-button:hover {
 /* ImageDisplay */
 .image-wrapper {
   height: 100%;
+  min-width: 235px;
+  margin-right: 30px;
 }
 
 .image-display {
