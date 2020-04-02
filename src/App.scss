@@ -1,6 +1,10 @@
-
-html, body, #root, #root>div {
-    height: 100%
+html {
+    height: 100%;
+    background-color: var(--bg-color);
+    body {
+      min-height: 100%;
+      background-color: var(--bg-color);
+    }
   }
 
 :root {
@@ -30,6 +34,7 @@ html, body, #root, #root>div {
 
 .App {
     background-color: var(--bg-color);
+    height: 100%;
 }
 
 /* ----- Tabs ------ */
@@ -61,6 +66,7 @@ li.nav-item a.nav-link:hover {
 
 li.nav-item a.active.nav-link{
   color: #335267;
+//   background-color: var(--bg-color);
 }
 
 li.nav-item:first-child {

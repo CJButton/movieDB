@@ -7,7 +7,7 @@ import ThemeSwitch from '../Components/ThemeSwitch'
 
 const AppWrapper = ({ children }: any) => {
   return (
-        <div className="App">
+        <div>
             <Tabs tabItems={TAB_ITEMS} />
             <Search />
             <ThemeSwitch />
