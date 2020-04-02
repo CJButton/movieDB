@@ -42,7 +42,6 @@ const Preview = ({previewID}: Preview) => {
           <ReactPlayer 
             url={`https://www.youtube.com/watch?v=${previewID}`} 
             controls
-            // playing 
           />
         </ModalBody>
         <ModalFooter>

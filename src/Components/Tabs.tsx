@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import classnames from 'classnames'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -8,15 +8,21 @@ type TabsType = {
 }
 
 const Tabs = ({ tabItems }: TabsType) => {
-    const history = useHistory()
-    const location = useLocation()
-    const [currentTab, updateLocalTab] = useState(location.pathname.slice(1))
+    const history = useHistory();
+    const location = useLocation();
+    const [currentTab, updateLocalTab] = useState(location.pathname.slice(1));
+
+    useEffect(() => {
+        if (!location.pathname.slice(1)) {
+            return updateLocalTab(tabItems[0].value);
+        };
+    }, [location, tabItems]);
 
     const redirectTo = (tabType: string) => {
-        updateLocalTab(tabType)
-        const search = location.search ? location.search: ''
-        history.push(`/${tabType}${search}`)
-    }
+        updateLocalTab(tabType);
+        const search = location.search ? location.search : '';
+        history.push(`/${tabType}${search}`);
+    };
 
     return (
         <Nav className='nav-wrapper' tabs fill>
