@@ -59,8 +59,13 @@ const Results = () => {
     }, [location, query, searchType, setResults]);
 
     const fetchPage = async (page: number) => {
-        const results = await fetchType(searchType, query, page);
-        setResults(results);
+        setLoader(true)
+        try {
+            const results = await fetchType(searchType, query, page);
+            setResults(results);
+        } finally {
+            setLoader(false);
+        }
     }
 
     const componentTree: ComponentTree = {

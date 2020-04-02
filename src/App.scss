@@ -152,7 +152,6 @@ Button.search-button:hover {
 /* Results */
 
 .results-wrapper {
-    position: relative;
     margin: 0 3em;
     color: #2F4E5F;
 }
@@ -163,8 +162,10 @@ Button.search-button:hover {
 
 .loader-wrapper {
     position: absolute;
-    width: 101%;
-    background: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--input-color);
     height: 100%;
     opacity: 0.5;
     z-index: 1;
@@ -174,7 +175,7 @@ Button.search-button:hover {
     position: absolute;
     z-index: 2;
     left: 50%;
-    top: 1%;
+    top: 3%;
 }
 
 /* Movie */
