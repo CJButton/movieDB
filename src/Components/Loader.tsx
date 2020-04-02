@@ -1,9 +1,10 @@
 import React from 'react';
+import { Spinner } from 'reactstrap'
 
 const LoaderIcon = () => {
     return (
         <div className="loader-icon">
-            <i className="fa fa-cog fa-spin" />
+             <Spinner color="danger" />
         </div>
     )
 }
