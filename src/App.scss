@@ -17,6 +17,9 @@ html {
     --search-hover-color: #FBFCFD;
     --search-hover-bg: #121212;
     --tab-color: #ffffff;
+    --results-wrapper: #ffffff;
+    --result-color: #ffffff;
+    --result-title: #ffffff;
 }
 
 [data-theme="Light"] {
@@ -29,6 +32,9 @@ html {
     --search-hover-color: #ffffff;
     --search-hover-bg: #335267;
     --tab-color: #335267;
+    --results-wrapper: #2F4E5F;
+    --result-color: #325263;
+    --result-title: #15374C;
 }
 
 .theme-switch {
@@ -153,7 +159,7 @@ Button.search-button:hover {
 
 .results-wrapper {
     margin: 0 3em;
-    color: #2F4E5F;
+    color: var(--results-wrapper);
 }
 
 .results-wrapper-block {
@@ -187,9 +193,9 @@ Button.search-button:hover {
   height: 100%;
 }
 
-.type-title {
+.result-title {
   margin-right: 5px;
-  color: #15374C;
+  color: var(--result-title);
 }
 
 .type-year {
@@ -204,8 +210,8 @@ Button.search-button:hover {
   padding: 0 5px;
 }
 
-.movie-overview {
-  color: #325263;
+.result-overview {
+  color: var(--result-color);
 }
 
 .movie-ratings {

@@ -57,7 +57,7 @@ const ResultBody = (props: ResultsBodyType) => {
     <div className='type-wrapper'>
       <div>
         <Row>
-          <h5 className='type-title'>{header}</h5>
+          <h5 className='result-title'>{header}</h5>
           {subtitle && 
             <h5 className='type-year'>{subtitle}</h5>}
         </Row>
@@ -75,7 +75,7 @@ const ResultBody = (props: ResultsBodyType) => {
             </p>}
         </Row>
         <Row>
-          <p className='movie-overview'>
+          <p className='result-overview'>
             <TruncateText>
               { overview }
             </TruncateText>
