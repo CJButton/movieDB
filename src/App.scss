@@ -247,8 +247,17 @@ Button.search-button:hover {
 /* Preview */
 
 div.modal-dialog.modal-preview {
-  width: 675px;
-  max-width: 1000px;
+    width: 675px;
+    max-width: 1000px;
+}
+
+.modal-body {
+    background-color: var(--bg-color);
+}
+
+div.modal-footer {
+    background-color: var(--bg-color);
+    border-top: none;
 }
 
 Button.preview-button {
