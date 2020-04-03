@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row } from 'reactstrap'
 import Ratings from './Ratings'
 import Preview from './Preview'
 import TruncateText from './TruncateText'
@@ -56,12 +55,12 @@ const ResultBody = (props: ResultsBodyType) => {
   return(
     <div className='type-wrapper'>
       <div>
-        <Row>
+        <div className='title-wrapper'>
           <h5 className='result-title'>{header}</h5>
           {subtitle && 
             <h5 className='type-year'>{subtitle}</h5>}
-        </Row>
-        <Row className='movie-extras'>
+        </div>
+        <div className='movie-extras'>
           { !!leftOfHyphen && 
             <p className='movie-director'>
               {hyphenText[type].left}
@@ -73,19 +72,19 @@ const ResultBody = (props: ResultsBodyType) => {
               {hyphenText[type].right}
               {rightOfHyphen}
             </p>}
-        </Row>
-        <Row>
+        </div>
+        <div>
           <p className='result-overview'>
             <TruncateText>
               { overview }
             </TruncateText>
           </p>
-        </Row>
+        </div>
       </div>
-      <Row className='movie-ratings'>
+      <div className='movie-ratings'>
         { displayVotes && <Ratings votes={voteAverage} />}
         { preview && <Preview previewID={preview} />}
-      </Row>
+      </div>
     </div>
   )
 }

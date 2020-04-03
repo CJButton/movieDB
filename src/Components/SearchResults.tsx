@@ -105,7 +105,8 @@ const Results = () => {
                                 <LazyLoad
                                     offsetVertical={200}
                                     debounce
-                                    once>
+                                    once
+                                    width={'100%'}>
                                     <SelectedComponent {...item} />
                                 </LazyLoad>
                             )}

@@ -19,7 +19,7 @@ const ImageDisplay = ({image, title}: ImageDisplayProps) => {
       <div className='image-wrapper'>
         <LazyLoad
           height={300}
-          width={150}
+          width={200}
           debounce={false}
           offsetVertical={500}
           once
