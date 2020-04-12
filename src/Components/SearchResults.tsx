@@ -6,7 +6,6 @@ import Person from './Person'
 import ImageDisplay from './ImageDisplay'
 import Paginator from './Paginator'
 import Loader from './Loader'
-import { Row, Col } from 'reactstrap';
 import { fetchType, fetchTrending } from '../requests'
 import { useLocation } from 'react-router-dom'
 
