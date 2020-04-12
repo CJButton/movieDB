@@ -109,6 +109,10 @@ li.nav-item:last-child {
 
 /* ----- Search ------ */
 
+.search-wrapper {
+    display: flex;
+}
+
 .input-icons i { 
   position: absolute;
   color: var(--input-color);

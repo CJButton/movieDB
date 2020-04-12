@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { Form, FormGroup, Input, Button, Row } from 'reactstrap';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { useHistory, useLocation } from 'react-router-dom'
 
 type SearchInterface = {
@@ -47,7 +47,7 @@ const Search = () => {
         <div className="input-icons"> 
             <Form onSubmit={searchForItem}>
                 <FormGroup>
-                    <Row>
+                    <div className="search-wrapper">
                         <i className="fa fa-search icon"></i>
                         <Input
                             placeholder={`Search for${searchForType}`}
@@ -63,7 +63,7 @@ const Search = () => {
                             onClick={searchForItem}>
                             Search
                         </Button>
-                    </Row>
+                    </div>
                 </FormGroup>
             </Form>
         </div>
