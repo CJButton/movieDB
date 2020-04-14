@@ -5,9 +5,9 @@ import TV from './TV'
 import Person from './Person'
 import ImageDisplay from './ImageDisplay'
 import Paginator from './Paginator'
-import Loader from './Loader'
 import { fetchType, fetchTrending } from '../requests'
 import { useLocation } from 'react-router-dom'
+import { useLoaderStore } from '../Stores/Loader.store';
 
 const getQuery = (location: any) => {
     const params = new URLSearchParams(location.search)
@@ -19,11 +19,17 @@ type ComponentTree = {
 }
 const Results = () => {
     const location = useLocation()
+    const { loading, activate, deactivate } = useLoaderStore(
+        state => ({
+            loading: state.loading,
+            activate: state.activate,
+            deactivate: state.deactivate
+        })
+    );
 
     const [urlData, updateUrlData] = useState({ query: '', searchType: location.pathname.slice(1) })
     const [searchResults, setSearchResults] = useState([])
     const [currentPages, setCurrentPage] = useState({ current: 1, total: 0 })
-    const [loader, setLoader] = useState(true)
 
     const { query, searchType } = urlData
 
@@ -42,7 +48,7 @@ const Results = () => {
             const query = getQuery(location)
 
             updateUrlData({ query, searchType: type })
-            setLoader(true)
+            activate();
             try {
                 const promise = !query ? fetchTrending(type) : fetchType(type, query, 1)
 
@@ -50,20 +56,20 @@ const Results = () => {
             } catch(error) {
                 console.error(error)
             } finally {
-                setLoader(false)
+                deactivate();
             }
 
         }
         getMediaList();
-    }, [location, query, searchType, setResults]);
+    }, [location, query, searchType, setResults, activate, deactivate]);
 
     const fetchPage = async (page: number) => {
-        setLoader(true)
+        activate();
         try {
             const results = await fetchType(searchType, query, page);
             setResults(results);
         } finally {
-            setLoader(false);
+            deactivate();
         }
     }
 
@@ -85,7 +91,6 @@ const Results = () => {
     
     return (
         <div className='results-wrapper'>
-            {loader && <Loader />}
             {query && (
                 <Paginator
                     currentPage={currentPages.current}
@@ -100,7 +105,7 @@ const Results = () => {
                         <ImageDisplay 
                             image={item.poster_path || item.profile_path}
                             title={item.title || item.name} />
-                            {!loader && (
+                            {!loading && (
                                 <LazyLoad
                                     offsetVertical={200}
                                     debounce

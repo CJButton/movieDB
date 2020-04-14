@@ -25,7 +25,8 @@
     "react-scripts": "^3.4.1",
     "react-truncate": "^2.4.0",
     "reactstrap": "^8.0.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "zustand": "^2.2.3"
   },
   "scripts": {
     "predeploy": "npm run build",
